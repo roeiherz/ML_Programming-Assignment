@@ -111,15 +111,16 @@ def run_knn(train, train_labels, test, test_labels, k, n):
     return accuracy
 
 
-def plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label=''):
+def plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label='', ylabel=''):
     """
     This function will save and plot graph of accuracy vs K
     :param accuracy_lst: the accuracy results for each k
     """
+    plt.figure()
     plt.plot(accuracy_lst)
     plt.title("KNN algorithm for k={0} and N={1}".format(K, NOF_TRAINING_DATA))
     plt.ylabel('Accuracy')
-    plt.xlabel('K')
+    plt.xlabel(ylabel)
     plt.savefig('{}.png'.format(label))
 
 
@@ -134,7 +135,7 @@ def get_accuracy_of_k(K=100, NOF_TRAINING_DATA=1000):
         # Append the accuracy results
         accuracy_lst.append(accuracy)
     # Plot and save the image
-    plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label="graph_N_fixed")
+    plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label="graph_N_fixed", ylabel='K')
 
 
 def get_accuracy_of_n(K=1, NOF_TRAINING_DATA=5000):
@@ -149,7 +150,7 @@ def get_accuracy_of_n(K=1, NOF_TRAINING_DATA=5000):
         # Append the accuracy results
         accuracy_lst.append(accuracy)
     # Plot and save the image
-    plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label="graph_K_fixed")
+    plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label="graph_K_fixed", ylabel='N')
 
 
 if __name__ == '__main__':
