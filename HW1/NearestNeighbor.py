@@ -50,7 +50,6 @@ def knn(train, train_labels, test_image, k):
     """
 
 
-
 if __name__ == '__main__':
     print 'start'
     data, labels = get_data_and_labels()
