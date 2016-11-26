@@ -119,7 +119,7 @@ def plot_graph(accuracy_lst):
     plt.title("KNN algorithm for k={0} and N={1}".format(K, NOF_TRAINING_DATA))
     plt.ylabel('Accuracy')
     plt.xlabel('K')
-    plt.show()
+    plt.savefig('graph.png')
 
 
 if __name__ == '__main__':
