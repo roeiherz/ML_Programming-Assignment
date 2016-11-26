@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93fda9f0-f77c-4abf-a696-bb901396ea6f" name="Default" comment="a">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/ML_Programming-Assignment.iml" afterPath="" />
+    <list default="true" id="93fda9f0-f77c-4abf-a696-bb901396ea6f" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HW1/NearestNeighbor.py" afterPath="$PROJECT_DIR$/HW1/NearestNeighbor.py" />
     </list>
     <ignored path="ML_Programming-Assignment.iws" />
@@ -26,28 +24,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NearestNeighbor.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NearestNeighbor.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HW1/NearestNeighbor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state relative-caret-position="-1417">
+              <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#283#500#0" expanded="true" />
-                <element signature="e#529#676#0" expanded="true" />
-                <element signature="e#726#1046#0" expanded="true" />
-                <element signature="e#1098#1373#0" expanded="true" />
+                <element signature="e#214#427#0" expanded="true" />
+                <element signature="e#456#603#0" expanded="true" />
+                <element signature="e#1138#1817#0" expanded="true" />
+                <element signature="e#1864#2519#0" expanded="true" />
+                <element signature="e#2585#3368#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -68,11 +57,9 @@
       <file leaf-file-name="os.py" pinned="false" current-in-tab="false">
         <entry file="file://C:/Python27/Lib/os.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="206" column="19" selection-start-line="206" selection-start-column="19" selection-end-line="206" selection-end-column="19" />
-              <folding>
-                <element signature="e#3559#4275#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="133">
+              <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -116,8 +103,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.js" />
-        <option value="$PROJECT_DIR$/HW1/NearestNeighbor.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/HW1/NearestNeighbor.py" />
       </list>
     </option>
   </component>
@@ -387,6 +374,21 @@
       <option name="presentableId" value="Default" />
       <updated>1480099424903</updated>
     </task>
+    <task id="LOCAL-00001" summary="fix .idea">
+      <created>1480167741290</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1480167741290</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add run_knn and knn methods">
+      <created>1480174448923</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1480174448923</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -397,7 +399,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32729805" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286908" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32729805" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286908" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43593314" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -441,17 +443,31 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix .idea" />
+    <MESSAGE value="add run_knn and knn methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="add run_knn and knn methods" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/HW1/NearestNeighbor.py</url>
-          <line>46</line>
+          <line>125</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
+      <option name="time" value="14" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="img" />
+        <watch expression="labels" />
+        <watch expression="test_labels[i]" />
+        <watch expression="predicted_label" />
+        <watch expression="k_nearest_labels" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Python27/Lib/urllib2.py">
@@ -467,16 +483,6 @@
         <state relative-caret-position="151">
           <caret line="251" column="0" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/os.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="206" column="19" selection-start-line="206" selection-start-column="19" selection-end-line="206" selection-end-column="19" />
-          <folding>
-            <element signature="e#3559#4275#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -505,10 +511,11 @@
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#283#500#0" expanded="true" />
-            <element signature="e#529#676#0" expanded="true" />
-            <element signature="e#726#1046#0" expanded="true" />
-            <element signature="e#1098#1373#0" expanded="true" />
+            <element signature="e#214#427#0" expanded="true" />
+            <element signature="e#456#603#0" expanded="true" />
+            <element signature="e#1138#1817#0" expanded="true" />
+            <element signature="e#1864#2519#0" expanded="true" />
+            <element signature="e#2585#3368#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -528,10 +535,11 @@
           <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="50" selection-end-column="4" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#283#500#0" expanded="true" />
-            <element signature="e#529#676#0" expanded="true" />
-            <element signature="e#726#1046#0" expanded="true" />
-            <element signature="e#1098#1373#0" expanded="true" />
+            <element signature="e#214#427#0" expanded="true" />
+            <element signature="e#456#603#0" expanded="true" />
+            <element signature="e#1138#1817#0" expanded="true" />
+            <element signature="e#1864#2519#0" expanded="true" />
+            <element signature="e#2585#3368#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -542,34 +550,44 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#283#500#0" expanded="true" />
-            <element signature="e#529#676#0" expanded="true" />
-            <element signature="e#726#1046#0" expanded="true" />
-            <element signature="e#1098#1373#0" expanded="true" />
+            <element signature="e#214#427#0" expanded="true" />
+            <element signature="e#456#603#0" expanded="true" />
+            <element signature="e#1138#1817#0" expanded="true" />
+            <element signature="e#1864#2519#0" expanded="true" />
+            <element signature="e#2585#3368#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/ide/ide-scripting.js" />
-    <entry file="file://$PROJECT_DIR$/HW1/NearestNeighbor.py">
+    <entry file="file://C:/Python27/Lib/os.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#283#500#0" expanded="true" />
-            <element signature="e#529#676#0" expanded="true" />
-            <element signature="e#726#1046#0" expanded="true" />
-            <element signature="e#1098#1373#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="133">
+          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="88">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW1/NearestNeighbor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1417">
+          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#214#427#0" expanded="true" />
+            <element signature="e#456#603#0" expanded="true" />
+            <element signature="e#1138#1817#0" expanded="true" />
+            <element signature="e#1864#2519#0" expanded="true" />
+            <element signature="e#2585#3368#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

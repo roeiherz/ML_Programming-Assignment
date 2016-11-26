@@ -29,6 +29,8 @@ def visualize(image):
 
 def get_train_and_test_data(data, labels):
     """
+    This function splits the data and the labels to train and test
+    Train size of 10000 and Test size of 1000
     :param data: data
     :param labels: labels
     :return:
@@ -87,8 +89,8 @@ def run_knn(train, train_labels, test, test_labels, k, n):
     :param test_labels: test label
     :param k: K
     :param n: Number of Training data
-    :param test: the test
-    :return:
+    :param test: Test data
+    :return: accuracy of the data
     """
     test_size = len(test)
     train_n = train[:n]
@@ -96,10 +98,13 @@ def run_knn(train, train_labels, test, test_labels, k, n):
     error = 0
 
     for i in range(test_size):
+        # Run the knn algorithm and get the predicted
         predicted_label = knn(train_n, train_labels_n, test[i], k=k)
         if not predicted_label == test_labels[i]:
+            # Count the errors
             error += 1
 
+    # Calculate the accuracy
     accuracy = 1.0 - (float(error) / test_size)
     return accuracy
 
