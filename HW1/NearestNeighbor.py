@@ -3,8 +3,9 @@ import datetime
 from sklearn.datasets import fetch_mldata
 from PIL import Image
 import os
+import matplotlib.pyplot as plt
 
-K = 100
+K = 10
 NOF_TRAINING_DATA = 1000
 
 __author__ = 'roeiherz & mosheraboh'
@@ -108,19 +109,38 @@ def run_knn(train, train_labels, test, test_labels, k, n):
     accuracy = 1.0 - (float(error) / test_size)
     return accuracy
 
+
+def plot_graph(accuracy_lst):
+    """
+    This function will save and plot graph of accuracy vs K
+    :param accuracy_lst: the accuracy results for each k
+    """
+    plt.plot(accuracy_lst)
+    plt.title("KNN algorithm for k={0} and N={1}".format(K, NOF_TRAINING_DATA))
+    plt.ylabel('Accuracy')
+    plt.xlabel('K')
+    plt.show()
+
+
 if __name__ == '__main__':
     print 'start'
     # Start time
     start_time = datetime.datetime.now()
+    print 'the start is {}'.format(start_time)
     data, labels = get_data_and_labels()
     train, train_labels, test, test_labels = get_train_and_test_data(data, labels)
     accuracy_lst = []
-    for i in range(K):
+    for i in range(1, K + 1):
         accuracy = run_knn(train, train_labels, test, test_labels, k=i, n=NOF_TRAINING_DATA)
         print 'The accuracy: k= {0}, n= {1} is: {2}'.format(i, NOF_TRAINING_DATA, accuracy)
         # Append the accuracy results
         accuracy_lst.append(accuracy)
 
+    # Plot and save the image
+    plot_graph(accuracy_lst)
+
     # End time
     end_time = datetime.datetime.now()
+    time_diff = end_time - start_time
+    print 'this algo runs in {0} '.format(time_diff)
     print 'end'
