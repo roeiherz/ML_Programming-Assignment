@@ -3,7 +3,7 @@ from sklearn.datasets import fetch_mldata
 from PIL import Image
 import os
 
-__author__ = 'roeiherz&mosheraboh'
+__author__ = 'roeiherz & mosheraboh'
 
 MNIST_DATA_PATH = "C:\Users\J&M\PycharmProjects\ML_Programming-Assignment\HW1"
 MNIST_FILE_NAME = "mnist-original.mat"
@@ -48,6 +48,7 @@ def knn(train, train_labels, test_image, k):
     :param test_image: one image for testing
     :param k: hyper-parameter
     """
+
 
 
 if __name__ == '__main__':
