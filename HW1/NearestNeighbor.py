@@ -5,8 +5,11 @@ from PIL import Image
 import os
 import matplotlib.pyplot as plt
 
-K = 100
-NOF_TRAINING_DATA = 1000
+N_STEP = 100
+# K = 100
+# NOF_TRAINING_DATA = 1000
+K = 1
+NOF_TRAINING_DATA = 5000
 
 __author__ = 'roeiherz & mosheraboh'
 
@@ -119,8 +122,33 @@ def plot_graph(accuracy_lst):
     plt.title("KNN algorithm for k={0} and N={1}".format(K, NOF_TRAINING_DATA))
     plt.ylabel('Accuracy')
     plt.xlabel('K')
-    plt.savefig('graph.png')
+    plt.savefig('graph_N_fixed.png')
 
+
+def get_accuracy_of_k():
+    """
+    This function runs the KNN algorithm of K while N is fixed
+    :return: accuracy_lst
+    """
+    for i in range(1, K + 1):
+        accuracy = run_knn(train, train_labels, test, test_labels, k=i, n=NOF_TRAINING_DATA)
+        print 'The accuracy: k= {0}, n= {1} is: {2}'.format(i, NOF_TRAINING_DATA, accuracy)
+        # Append the accuracy results
+        accuracy_lst.append(accuracy)
+    return accuracy_lst
+
+
+def get_accuracy_of_n():
+    """
+    This function runs the KNN algorithm of N while K is fixed
+    :return: accuracy_lst
+    """
+    for i in range(N_STEP, NOF_TRAINING_DATA + 1, N_STEP):
+        accuracy = run_knn(train, train_labels, test, test_labels, k=K, n=i)
+        print 'The accuracy: k= {0}, n= {1} is: {2}'.format(K, i, accuracy)
+        # Append the accuracy results
+        accuracy_lst.append(accuracy)
+    return accuracy_lst
 
 if __name__ == '__main__':
     print 'start'
@@ -130,12 +158,9 @@ if __name__ == '__main__':
     data, labels = get_data_and_labels()
     train, train_labels, test, test_labels = get_train_and_test_data(data, labels)
     accuracy_lst = []
-    for i in range(1, K + 1):
-        accuracy = run_knn(train, train_labels, test, test_labels, k=i, n=NOF_TRAINING_DATA)
-        print 'The accuracy: k= {0}, n= {1} is: {2}'.format(i, NOF_TRAINING_DATA, accuracy)
-        # Append the accuracy results
-        accuracy_lst.append(accuracy)
 
+    # accuracy_lst = get_accuracy_of_k()
+    accuracy_lst = get_accuracy_of_n()
     # Plot and save the image
     plot_graph(accuracy_lst)
 
