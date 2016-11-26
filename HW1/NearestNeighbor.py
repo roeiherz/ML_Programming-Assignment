@@ -39,6 +39,18 @@ def get_train_and_test_data(data, labels):
     test_labels = labels[idx[10000:]]
     return train, train_labels, test, test_labels
 
+
+def knn(train, train_labels, test_image, k):
+    """
+    This function will implemented K-NN algorithm to return a prediction of the query image
+    :param train: train set
+    :param train_labels: train labels corresponding to the train set
+    :param test_image: one image for testing
+    :param k: hyper-parameter
+    """
+
+
+
 if __name__ == '__main__':
     print 'start'
     data, labels = get_data_and_labels()
