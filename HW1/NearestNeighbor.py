@@ -1,12 +1,11 @@
 import numpy as np
 from sklearn.datasets import fetch_mldata
-import cv2
 from PIL import Image
 import os
 
-__author__ = 'roeiherz'
+__author__ = 'roeiherz&mosheraboh'
 
-MNIST_DATA_PATH = "C:\Users\RoeiH\PycharmProjects\ML_Programming-Assignment\HW1"
+MNIST_DATA_PATH = "C:\Users\J&M\PycharmProjects\ML_Programming-Assignment\HW1"
 MNIST_FILE_NAME = "mnist-original.mat"
 
 
