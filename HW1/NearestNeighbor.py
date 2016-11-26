@@ -5,7 +5,7 @@ from PIL import Image
 import os
 import matplotlib.pyplot as plt
 
-K = 10
+K = 100
 NOF_TRAINING_DATA = 1000
 
 __author__ = 'roeiherz & mosheraboh'
