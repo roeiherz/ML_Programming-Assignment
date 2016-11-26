@@ -3,13 +3,11 @@ import datetime
 from sklearn.datasets import fetch_mldata
 from PIL import Image
 import os
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 N_STEP = 100
-# K = 100
-# NOF_TRAINING_DATA = 1000
-# K = 1
-# NOF_TRAINING_DATA = 5000
 
 __author__ = 'roeiherz & mosheraboh'
 
@@ -152,6 +150,7 @@ def get_accuracy_of_n(K=1, NOF_TRAINING_DATA=5000):
         accuracy_lst.append(accuracy)
     # Plot and save the image
     plot_graph(accuracy_lst, K, NOF_TRAINING_DATA, label="graph_K_fixed")
+
 
 if __name__ == '__main__':
     print 'start'
