@@ -233,51 +233,61 @@ def part_d_and_e(t=100, file_name='', plot=True):
 
 def get_hypo_label(x, hypo):
     """
-
-    :param x:
-    :param hypo:
-    :return:
+    This function finds if x has label 1 or 0 according to the hypothesis
+    We are checking if x is in one of the hypothesis (list of intervals). if it does than 1 else 0.
+    :param x: the point x is a tuple
+    :param hypo: hypothesis (list of intervals (tuples)
+    :return: int 1 or 0
     """
 
     for interval in hypo:
-
         xstart_point = interval[0]
         xend_point = interval[1]
 
         if xstart_point < x < xend_point:
+            # this point has a label 1 because it between the intervals
             return 1
-
     return 0
 
 
 def part_f():
     """
-    This function
-    :return:
+    This function performs a cross-validation which means we are testing our hypothesis from part d
+    and check the best error and best hypo on unseen data (we run 50 samples in training (part d)
+    and 50 samples in validation (part f)
     """
 
     m = 50
+    # Run training and gets the hypothesis
     hypo_lst = part_d_and_e(t=1, plot=False)
+    # Create a new 50 sample to perform validation
     xs, ys = get_pairs(m)
 
+    # Saves the error and hypothesis
     intervals_err_lst = []
     intervals_hypo_lst = []
+
+    # Run each hypo from the training to check it on the new unseen data
     for hypo in hypo_lst:
         error = 0
 
         for i in range(len(xs)):
+            # The label from the hypothesis that we are checking
             hypo_label = get_hypo_label(xs[i], hypo)
+            # The true label
             true_label = ys[i]
             if not hypo_label == true_label:
                 error += 1
 
-        intervals_err_lst.append(float(error)/m)
+        intervals_err_lst.append(float(error) / m)
         intervals_hypo_lst.append(hypo)
 
+    # Get the best error and hypothesis
     best_error = min(intervals_err_lst)
     best_hypo = intervals_hypo_lst[intervals_err_lst.index(best_error)]
 
     print 'best error: {0}, best hypothesis: {1}'.format(best_error, best_hypo)
+
 
 if __name__ == '__main__':
     print 'start'
