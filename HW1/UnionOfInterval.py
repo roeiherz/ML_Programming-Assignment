@@ -1,11 +1,8 @@
 # coding=utf-8
 import numpy as np
 import datetime
-from sklearn.datasets import fetch_mldata
-import os
 from intervals import find_best_interval
 import matplotlib.pyplot as plt
-
 import matplotlib
 matplotlib.use('Agg')
 
@@ -14,11 +11,10 @@ __author__ = 'roeiherz & mosheraboh'
 
 def draw_pairs(xs, ys, intervals):
     """
-
+    This function draws the pairs
     :param xs: data
     :param ys: labels
     :param intervals: list of tuples
-    :return: none
     """
     plt.figure()
     plt.plot(xs, ys, 'ro')
@@ -32,7 +28,7 @@ def draw_pairs(xs, ys, intervals):
         plt.hlines(0.5, x_min, x_max, 'r', label='positive interval')
     axes = plt.gca()
     axes.set_ylim([-0.1, 1.1])
-    plt.savefig('{}.png'.format("samples"))
+    plt.savefig('{}.png'.format("partA"))
 
 
 def get_pairs(size):
@@ -100,7 +96,7 @@ def part_a():
 
 def calc_true_error(intervals):
     """
-    TBD
+    This function calculates the true error
     :param intervals:
     :return:
     """
@@ -133,11 +129,10 @@ def calc_true_error(intervals):
 
 def plot_graph(error_lst, m_lst, file_name='', label=''):
     """
-    TL:TR
-    AMALEK
-    :param error_lst:
-    :param m_lst:
-    :param file_name:
+    This function is plotting the graph
+    :param error_lst: the of errors
+    :param m_lst: the m's
+    :param file_name: file_name to be saved
     """
     plt.plot(m_lst, error_lst, label=label)
     plt.title("Error as a function of number of samples")
@@ -148,7 +143,7 @@ def plot_graph(error_lst, m_lst, file_name='', label=''):
 
 def part_c():
     """
-    This function implement part B from HW
+    This function implement part C from HW
     """
     K = 2
     T = 100
@@ -179,8 +174,8 @@ def part_c():
         avg_true_error_lst.append(avg_true_error)
         print "Avg TRUE error:{0}, Avg ERM error: {1}".format(avg_true_error, avg_erm_error)
 
-    plot_graph(avg_erm_error_lst, range(M_START, M_END + 1, M_STEP), "partc", "AVG ERM ERROR")
-    plot_graph(avg_true_error_lst, range(M_START, M_END + 1, M_STEP), "partc", "AVG TRUE ERROR")
+    plot_graph(avg_erm_error_lst, range(M_START, M_END + 1, M_STEP), "partC", "AVG ERM ERROR")
+    plot_graph(avg_true_error_lst, range(M_START, M_END + 1, M_STEP), "partC", "AVG TRUE ERROR")
 
 if __name__ == '__main__':
     print 'start'
@@ -191,9 +186,8 @@ if __name__ == '__main__':
     # part A
     # part_a()
 
-    # part B
+    # part C
     part_c()
-
 
     end_time = datetime.datetime.now()
     time_diff = end_time - start_time
