@@ -188,7 +188,7 @@ def part_c():
                title="Error as a function of number of samples", ylabel='Error', xlabel='Number of samples')
 
 
-def part_d_and_e(t=100, file_name=''):
+def part_d_and_e(t=100, file_name='', plot=True):
     """
     This function implement part D from HW
     :param t: t is the number of iterations
@@ -204,7 +204,9 @@ def part_d_and_e(t=100, file_name=''):
 
     # This list is for a plot
     avg_erm_error_lst = []
-
+    # This list is for returning intervals for cross-validating
+    intervals_lst = []
+    # Generate the data
     xs, ys = get_pairs(m)
     for k in range(1, K + 1):
 
@@ -215,15 +217,67 @@ def part_d_and_e(t=100, file_name=''):
             intervals, error = find_best_interval(xs, ys, k)
             erm_error = float(error) / m
             total_erm_error += erm_error
+            intervals_lst.append(intervals)
 
         avg_erm_error = total_erm_error / T
         avg_erm_error_lst.append(avg_erm_error)
         print "Avg ERM error: {0} in k: {1}".format(avg_erm_error, k)
 
-    plot_graph(avg_erm_error_lst, range(1, K + 1), file_name=file_name,
-               title="ERM Error as a function of number of hypothesis",
-               ylabel='ERM error', xlabel='Number of hypothesis')
+    if plot:
+        plot_graph(avg_erm_error_lst, range(1, K + 1), file_name=file_name,
+                   title="ERM Error as a function of number of hypothesis",
+                   ylabel='AVG ERM error', xlabel='Number of hypothesis')
 
+    return intervals_lst
+
+
+def get_hypo_label(x, hypo):
+    """
+
+    :param x:
+    :param hypo:
+    :return:
+    """
+
+    for interval in hypo:
+
+        xstart_point = interval[0]
+        xend_point = interval[1]
+
+        if xstart_point < x < xend_point:
+            return 1
+
+    return 0
+
+
+def part_f():
+    """
+    This function
+    :return:
+    """
+
+    m = 50
+    hypo_lst = part_d_and_e(t=1, plot=False)
+    xs, ys = get_pairs(m)
+
+    intervals_err_lst = []
+    intervals_hypo_lst = []
+    for hypo in hypo_lst:
+        error = 0
+
+        for i in range(len(xs)):
+            hypo_label = get_hypo_label(xs[i], hypo)
+            true_label = ys[i]
+            if not hypo_label == true_label:
+                error += 1
+
+        intervals_err_lst.append(float(error)/m)
+        intervals_hypo_lst.append(hypo)
+
+    best_error = min(intervals_err_lst)
+    best_hypo = intervals_hypo_lst[intervals_err_lst.index(best_error)]
+
+    print 'best error: {0}, best hypothesis: {1}'.format(best_error, best_hypo)
 
 if __name__ == '__main__':
     print 'start'
@@ -241,7 +295,10 @@ if __name__ == '__main__':
     # part_d_and_e(t=1, file_name='partD')
 
     # part e
-    part_d_and_e(t=100, file_name='partE')
+    # part_d_and_e(t=100, file_name='partE')
+
+    # part f
+    part_f()
 
     end_time = datetime.datetime.now()
     time_diff = end_time - start_time
