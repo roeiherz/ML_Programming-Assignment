@@ -150,7 +150,7 @@ def part_c():
     """
     This function implement part C from HW
     """
-    # Number of hypothesis
+    # Number of hypothesis (NOF intervals)
     K = 2
     # Number of iterations
     T = 100
@@ -195,7 +195,7 @@ def part_d_and_e(t=100, file_name=''):
     :param file_name: file name to be saved
     :return:
     """
-    # Number of hypothesis
+    # Number of hypothesis (NOF intervals)
     K = 20
     # Number of iterations
     T = t
