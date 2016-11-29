@@ -1,11 +1,11 @@
 # coding=utf-8
 import numpy as np
 import datetime
-from intervals import find_best_interval
-import matplotlib.pyplot as plt
 import matplotlib
-
 matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from intervals import find_best_interval
+
 
 __author__ = 'roeiherz & mosheraboh'
 
@@ -296,16 +296,16 @@ if __name__ == '__main__':
     print 'the start is at {}'.format(start_time)
 
     # part A
-    # part_a()
+    part_a()
 
     # part C
-    # part_c()
+    part_c()
 
     # part d
-    # part_d_and_e(t=1, file_name='partD')
+    part_d_and_e(t=1, file_name='partD')
 
     # part e
-    # part_d_and_e(t=100, file_name='partE')
+    part_d_and_e(t=100, file_name='partE')
 
     # part f
     part_f()
