@@ -4,6 +4,7 @@ import datetime
 from intervals import find_best_interval
 import matplotlib.pyplot as plt
 import matplotlib
+
 matplotlib.use('Agg')
 
 __author__ = 'roeiherz & mosheraboh'
@@ -97,7 +98,7 @@ def part_a():
 def calc_true_error(intervals):
     """
     This function calculates the true error
-    :param intervals:
+    :param intervals: intervals is list of tuples of intervals [(x1,y1), (x2, y2), ...]
     :return:
     """
     true_error = 0
@@ -127,17 +128,21 @@ def calc_true_error(intervals):
     return true_error
 
 
-def plot_graph(error_lst, m_lst, file_name='', label=''):
+def plot_graph(error_lst, m_lst, file_name='', label='', title='', ylabel='', xlabel=''):
     """
     This function is plotting the graph
+    :param label: for plotting legend
+    :param title: title for the plotting
+    :param ylabel: ylabel for the plotting
+    :param xlabel: xlabel for the plotting
     :param error_lst: the of errors
-    :param m_lst: the m's
+    :param m_lst: list of the number of samples
     :param file_name: file_name to be saved
     """
     plt.plot(m_lst, error_lst, label=label)
-    plt.title("Error as a function of number of samples")
-    plt.ylabel('Error')
-    plt.xlabel('Number of samples')
+    plt.title(title)
+    plt.ylabel(ylabel)
+    plt.xlabel(xlabel)
     plt.savefig('{}.png'.format(file_name))
 
 
@@ -145,8 +150,11 @@ def part_c():
     """
     This function implement part C from HW
     """
+    # Number of hypothesis
     K = 2
+    # Number of iterations
     T = 100
+    # Number of samples
     M_START = 10
     M_END = 100
     M_STEP = 5
@@ -174,8 +182,48 @@ def part_c():
         avg_true_error_lst.append(avg_true_error)
         print "Avg TRUE error:{0}, Avg ERM error: {1}".format(avg_true_error, avg_erm_error)
 
-    plot_graph(avg_erm_error_lst, range(M_START, M_END + 1, M_STEP), "partC", "AVG ERM ERROR")
-    plot_graph(avg_true_error_lst, range(M_START, M_END + 1, M_STEP), "partC", "AVG TRUE ERROR")
+    plot_graph(avg_erm_error_lst, range(M_START, M_END + 1, M_STEP), file_name="partC", label="AVG ERM ERROR",
+               title="Error as a function of number of samples", ylabel='Error', xlabel='Number of samples')
+    plot_graph(avg_true_error_lst, range(M_START, M_END + 1, M_STEP), file_name="partC", label="AVG TRUE ERROR",
+               title="Error as a function of number of samples", ylabel='Error', xlabel='Number of samples')
+
+
+def part_d_and_e(t=100, file_name=''):
+    """
+    This function implement part D from HW
+    :param t: t is the number of iterations
+    :param file_name: file name to be saved
+    :return:
+    """
+    # Number of hypothesis
+    K = 20
+    # Number of iterations
+    T = t
+    # Number of samples
+    m = 50
+
+    # This list is for a plot
+    avg_erm_error_lst = []
+
+    xs, ys = get_pairs(m)
+    for k in range(1, K + 1):
+
+        # Temp vars for average calculation
+        total_erm_error = 0
+        for t in range(1, T + 1):
+            # Calculate the averages
+            intervals, error = find_best_interval(xs, ys, k)
+            erm_error = float(error) / m
+            total_erm_error += erm_error
+
+        avg_erm_error = total_erm_error / T
+        avg_erm_error_lst.append(avg_erm_error)
+        print "Avg ERM error: {0} in k: {1}".format(avg_erm_error, k)
+
+    plot_graph(avg_erm_error_lst, range(1, K + 1), file_name=file_name,
+               title="ERM Error as a function of number of hypothesis",
+               ylabel='ERM error', xlabel='Number of hypothesis')
+
 
 if __name__ == '__main__':
     print 'start'
@@ -187,7 +235,13 @@ if __name__ == '__main__':
     # part_a()
 
     # part C
-    part_c()
+    # part_c()
+
+    # part d
+    part_d_and_e(t=1, file_name='partD')
+
+    # part e
+    # part_d_and_e(t=100, file_name='partE')
 
     end_time = datetime.datetime.now()
     time_diff = end_time - start_time
