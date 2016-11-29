@@ -238,10 +238,10 @@ if __name__ == '__main__':
     # part_c()
 
     # part d
-    part_d_and_e(t=1, file_name='partD')
+    # part_d_and_e(t=1, file_name='partD')
 
     # part e
-    # part_d_and_e(t=100, file_name='partE')
+    part_d_and_e(t=100, file_name='partE')
 
     end_time = datetime.datetime.now()
     time_diff = end_time - start_time
