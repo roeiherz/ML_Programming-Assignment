@@ -73,8 +73,7 @@ This is the expected results, since it will be possible to find better (closer) 
 ## 2. **Union of intervals** 
 In this question, we will study the hypothesis class of a finite
 union of disjoint intervals, discussed in class. 
-To review, let the sample space be
-X = [0, 1] and assume we study a binary classification problem, i.e. Y = {0, 1}. 
+To review, let the sample space be X = [0, 1] and assume we study a binary classification problem, i.e. Y = {0, 1}. 
 We will try to learn using an hypothesis class that consists of k intervals. 
 More explicitly, let I = {[l1, u1], . . . , [lk, uk]} be k disjoint intervals, 
 such that 0 ≤ l1 ≤ u1 ≤ l2 ≤ u2 ≤. . . ≤ uk ≤ 1. 
@@ -107,16 +106,22 @@ The error is 15% (2*0.25*0.2 + 2*0.25*0.1 = 0.15)
 Section C:
 True error function: "calc_true_error" in file "UnionOfInterval.py".
 The experiment function: "part_c" in file "UnionOfInterval.py".
-The image file name is "partC.png"
+
+![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partC.png)
+
 The green line is the true error as a function of m.
 The blue line is the empirical error as a function of m.
+
 As we can see:
-The empirical error increasing when m grows. When m is small, there are small amount of samples, sparse, so it is easier to find intervals with better results (smaller error) compared to the true hypothesis (on these samples only of course). In such a case the ERM overfits.
+The empirical error increasing when m grows. When m is small, there are small amount of samples, sparse, so it is easier to find intervals with better results (smaller error) compared to the true hypothesis (on these samples only of course). 
+In such a case the ERM overfits.
 The true error decreasing when m is grows. The true hypothesis best fit to the theoretical distribution. The samples will better reflect the theoretical distribution when m is big.
 
 Section D:
 Function name "part_d_and_e(t = 1, file_name="partD.png")" in file "UnionOfInterval.py".
-Image file is "partD.png"
+
+![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partD.png)
+
 The error decreasing when k growth. When single interval allows to reduce the error with at least one (when the error != 0 of course).
 K* will is any k bigger then 8. Of course K* is not a good choice since it overfits the samples.
 
