@@ -93,6 +93,7 @@ Assume that the points are sorted, so that 0 ≤ x1 < x2 < . . . < xm ≤ 1.
 We will now study the properties of the ERM algorithm for this class
 
 Section A:
+
 Function "part_a" in file "UnionOfInterval.py"
 ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partA.png)
 
@@ -100,10 +101,12 @@ The red lines are the intervals (the result of function "find_best_intervals" wi
 The blue lines are vertical lines is x=0.25, 0.5, 1.
 
 Section B:
+
 Given the distribution, the hypothesis with the smallest error will be hypothesis of 2 intervals ((0, 0.25), (0.5, 0.75)).
 The error is 15% (2*0.25*0.2 + 2*0.25*0.1 = 0.15) 
 
 Section C:
+
 True error function: "calc_true_error" in file "UnionOfInterval.py".
 The experiment function: "part_c" in file "UnionOfInterval.py".
 
@@ -118,6 +121,7 @@ In such a case the ERM overfits.
 The true error decreasing when m is grows. The true hypothesis best fit to the theoretical distribution. The samples will better reflect the theoretical distribution when m is big.
 
 Section D:
+
 Function name "part_d_and_e(t = 1, file_name="partD.png")" in file "UnionOfInterval.py".
 
 ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partD.png)
@@ -126,4 +130,5 @@ The error decreasing when k growth. When single interval allows to reduce the er
 K* will is any k bigger then 8. Of course K* is not a good choice since it overfits the samples.
 
 Section E:
+
 Function name "part_d_and_e(t = 100, file_name="partE.png")" in file "UnionOfInterval.py".
