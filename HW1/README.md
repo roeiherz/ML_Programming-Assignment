@@ -5,7 +5,7 @@ where each pixel is in grayscale scale, and can get an integer value from 0 to 2
 label is a digit between 0 and 9. The dataset has 70,000 images. Althought each image
 is square, we treat it as a vector of size 784.
 
-    1.:
+    a:
     **Question**:
     Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
     corresponding to the images (ii) a query image; and (iii) a number k. The function
@@ -17,38 +17,54 @@ is square, we treat it as a vector of size 784.
     **Answer**:
     See function "knn" in file "NearestNeighbor.py"
 
-    2.:
+    b:
     **Question**:
     Run the algorithm using the first n = 1000 training images, on each of the test
     images, using k = 10. What is the accuracy of the prediction (measured by 0-1
     loss; i.e. the percentage of correct classifications)? What would you expect from
     a completely random predictor?
+    
     **Answer**:
     The accuracy of prediction of KNN with k=10 over 1000 training images (n=1000) is 0.157.
     We would expect from a completely random predicate accuracy of prediction of 0.1 (we have 10 different labels).
 
-C:
-See function "get_accuracy_of_k" in file "NearestNeighbor.py"
-Image file: " graph_N_fixed.png"
+    c:
+    **Question**:
+    Plot the prediction accuracy as a function of k, for k = 1, . . . , 100 and n = 1000.
+    Discuss the results. What is the best k?
+    
+    **Answer**:
+    See function "get_accuracy_of_k" in file "NearestNeighbor.py"
+    Image file: " graph_N_fixed.png"
 
-![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/graph_N_fixed.png)
+    ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/graph_N_fixed.png)
 
-The best k is 1- (about the same accuracy).
-As we can see in the graph:
-for small Ks (1 to 3) we get the highest accuracy. We can see that the accuracy descend and approaches 0.1 when k growth.
-0.1 is the accuracy is the accuracy we would expect from a completely random predicator.
-We would expect for such a behavior, since:
-1. Euclidian distance is not accurate (however better than a random predicator)
-2. The influence of each of the k nearest neighbors is equal (meaning that the nearest neighbors and the k nearest neighbor will equally influence the result).
-Since that the training set is sparse (only 1000 images).
-D:
-See function "get_accuracy_of_k" in file "NearestNeighbor.py"
-Image file: " graph_K_fixed.png"
+    The best k is 1- (about the same accuracy).
+    As we can see in the graph:
+    for small Ks (1 to 3) we get the highest accuracy. 
+    We can see that the accuracy descend and approaches 0.1 when k growth.
+    0.1 is the accuracy is the accuracy we would expect from a completely random predicator.
+    
+    We would expect for such a behavior, since:
+    1. Euclidian distance is not accurate (however better than a random predicator)
+    2. The influence of each of the k nearest neighbors is equal (meaning that the nearest neighbors and the k nearest  neighbor will equally influence the result).
+    Since that the training set is sparse (only 1000 images).
+
+    d:
+    **Question**:
+    Now we fix k to be the best k from before, and instead vary the number of training
+    images. Plot the prediction accuracy as a function of n = 100, 200, . . . , 5000.
+    Discuss the results.
+    
+    **Answer**:
+    See function "get_accuracy_of_k" in file "NearestNeighbor.py"
+    Image file: " graph_K_fixed.png"
+    ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/graph_K_fixed.png)
 
 
-According to the graph we can see that we get better accuracy with bigger training size. 
-We ran it with k=1 (the best results from above).
-This is the expected results, since it will be possible to find better (closer) single nearest neighbor which better reflect (statistically of course) the true label. 
+    According to the graph we can see that we get better accuracy with bigger training size. 
+    We ran it with k=1 (the best results from above).
+    This is the expected results, since it will be possible to find better (closer) single nearest neighbor which better reflect (statistically of course) the true label. 
 
 2.
 A:
