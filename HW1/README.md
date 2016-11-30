@@ -1,5 +1,6 @@
 # Results
-1.  In this question, we will study the performance of the Nearest
+## 1. Nearest Neighbor (NN) algorithm
+In this question, we will study the performance of the Nearest
 Neighbor (NN) algorithm on the MNIST dataset. The MNIST dataset consists of
 images of handwritten digits, along with their labels. Each image has 28 × 28 pixels,
 where each pixel is in grayscale scale, and can get an integer value from 0 to 255. Each
@@ -69,7 +70,7 @@ is square, we treat it as a vector of size 784.
     We ran it with k=1 (the best results from above).
     This is the expected results, since it will be possible to find better (closer) single nearest neighbor which better reflect (statistically of course) the true label. 
 
-2. **Union of intervals** 
+## 2. **Union of intervals** 
     In this question, we will study the hypothesis class of a finite
     union of disjoint intervals, discussed in class. 
     To review, let the sample space be
