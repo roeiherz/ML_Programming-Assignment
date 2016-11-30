@@ -5,7 +5,7 @@ where each pixel is in grayscale scale, and can get an integer value from 0 to 2
 label is a digit between 0 and 9. The dataset has 70,000 images. Althought each image
 is square, we treat it as a vector of size 784.
 
-    a:
+    -:
     **Question**:
     Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
     corresponding to the images (ii) a query image; and (iii) a number k. The function
@@ -17,7 +17,7 @@ is square, we treat it as a vector of size 784.
     **Answer**:
     See function "knn" in file "NearestNeighbor.py"
 
-    b:
+    -:
     **Question**:
     Run the algorithm using the first n = 1000 training images, on each of the test
     images, using k = 10. What is the accuracy of the prediction (measured by 0-1
@@ -28,7 +28,7 @@ is square, we treat it as a vector of size 784.
     The accuracy of prediction of KNN with k=10 over 1000 training images (n=1000) is 0.157.
     We would expect from a completely random predicate accuracy of prediction of 0.1 (we have 10 different labels).
 
-    c:
+    -:
     **Question**:
     Plot the prediction accuracy as a function of k, for k = 1, . . . , 100 and n = 1000.
     Discuss the results. What is the best k?
@@ -50,7 +50,7 @@ is square, we treat it as a vector of size 784.
     2. The influence of each of the k nearest neighbors is equal (meaning that the nearest neighbors and the k nearest  neighbor will equally influence the result).
     Since that the training set is sparse (only 1000 images).
 
-    d:
+    -:
     **Question**:
     Now we fix k to be the best k from before, and instead vary the number of training
     images. Plot the prediction accuracy as a function of n = 100, 200, . . . , 5000.
