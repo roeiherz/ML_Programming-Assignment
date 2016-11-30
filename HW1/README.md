@@ -126,3 +126,20 @@ K* will is any k bigger then 8. Of course K* is not a good choice since it overf
 
 ### Section E:
 Function name "part_d_and_e(t = 100, file_name="partE.png")" in file "UnionOfInterval.py".
+
+![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partE.png)
+
+### Section F:
+function name: part_f() in file in file "UnionOfInterval.py". 
+
+Given a new data set with m=50, we would perform cross validation in the following way:
+- Get the best hypothesis per k from section D.
+- Compare the hypothesis labels with the true labels of the new dataset (validation data set).
+- Pick the best hypothesis (the lowest number of errors over the new data set).  
+This cross validation will allow us to avoid from model which overfit the original sample from section D.
+Indeed with relatively small number of samples we were able to find a hypothesis which is very close to the theoretical best hypothesis (same number of intervals and overlapping intervals).
+intervals = (0.005, 0.24), (0.49, 0.72)
+Error = 0.14
+
+Note:
+Dividing the samples to a bigger number of training samples  vs validation samples might produce better results.
