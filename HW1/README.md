@@ -9,9 +9,11 @@ is square, we treat it as a vector of size 784.
 
 ### Section A:
 **Question**:
-Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
-corresponding to the images (ii) a query image; and (iii) a number k. The function
-will implement the k-NN algorithm to return a prediction of the query image,
+Write a function that accepts as input: 
+(i) a set of images; 
+(ii) a vector of labels corresponding to the images (ii) a query image
+(iii) a number k. 
+The function will implement the k-NN algorithm to return a prediction of the query image,
 given the given label set of images. The function will use the k nearest neighbors,
 using the Euclidean L2 metric. In case of a tie between the k labels of neighbors,
 it will choose an arbitrary option
