@@ -11,7 +11,7 @@ See function "get_accuracy_of_k" in file "NearestNeighbor.py"
 Image file: " graph_N_fixed.png"
 
 ![Alt text](/relative/graph_N_fixed.png?raw=true "Optional Title")
-
+![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/graph_N_fixed.png)
 
 The best k is 1- (about the same accuracy).
 As we can see in the graph:
