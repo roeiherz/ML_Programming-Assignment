@@ -1,4 +1,5 @@
-1. A:
+1. 
+A:
 See function "knn" in file "NearestNeighbor.py"
 
 B:
