@@ -5,27 +5,27 @@ where each pixel is in grayscale scale, and can get an integer value from 0 to 2
 label is a digit between 0 and 9. The dataset has 70,000 images. Althought each image
 is square, we treat it as a vector of size 784.
 
-  1.:
-  **Question**:
-  Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
-  corresponding to the images (ii) a query image; and (iii) a number k. The function
-  will implement the k-NN algorithm to return a prediction of the query image,
-  given the given label set of images. The function will use the k nearest neighbors,
-  using the Euclidean L2 metric. In case of a tie between the k labels of neighbors,
-  it will choose an arbitrary option
+    1.:
+    **Question**:
+    Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
+    corresponding to the images (ii) a query image; and (iii) a number k. The function
+    will implement the k-NN algorithm to return a prediction of the query image,
+    given the given label set of images. The function will use the k nearest neighbors,
+    using the Euclidean L2 metric. In case of a tie between the k labels of neighbors,
+    it will choose an arbitrary option
 
-  **Answer**:
-  See function "knn" in file "NearestNeighbor.py"
+    **Answer**:
+    See function "knn" in file "NearestNeighbor.py"
 
-  2.:
-  **Question**:
-  Run the algorithm using the first n = 1000 training images, on each of the test
-  images, using k = 10. What is the accuracy of the prediction (measured by 0-1
-  loss; i.e. the percentage of correct classifications)? What would you expect from
-  a completely random predictor?
-  **Answer**:
-  The accuracy of prediction of KNN with k=10 over 1000 training images (n=1000) is 0.157.
-  We would expect from a completely random predicate accuracy of prediction of 0.1 (we have 10 different labels).
+    2.:
+    **Question**:
+    Run the algorithm using the first n = 1000 training images, on each of the test
+    images, using k = 10. What is the accuracy of the prediction (measured by 0-1
+    loss; i.e. the percentage of correct classifications)? What would you expect from
+    a completely random predictor?
+    **Answer**:
+    The accuracy of prediction of KNN with k=10 over 1000 training images (n=1000) is 0.157.
+    We would expect from a completely random predicate accuracy of prediction of 0.1 (we have 10 different labels).
 
 C:
 See function "get_accuracy_of_k" in file "NearestNeighbor.py"
