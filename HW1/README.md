@@ -20,7 +20,6 @@ it will choose an arbitrary option
 See function "knn" in file "NearestNeighbor.py"
 
 ### Section B:
-
 **Question**:
 Run the algorithm using the first n = 1000 training images, on each of the test
 images, using k = 10. What is the accuracy of the prediction (measured by 0-1
@@ -80,6 +79,7 @@ hI (x) = (1 if x ∈ [l1, u1], . . . , [lk, uk], 0 otherwise)
 
 Finally, define Hk as the hypothesis class that consists of all hypotheses that correspond
 to k disjoint intervals:
+
 Hk = {hI |I = {[l1, u1], . . . , [lk, uk]}, 0 ≤ l1 ≤ u1 ≤ l2 ≤ u2 ≤ . . . ≤ uk ≤ 1}
 
 We note that Hk ⊆ Hk+1, since we can always take one of the intervals to be of
