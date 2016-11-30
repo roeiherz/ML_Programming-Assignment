@@ -5,7 +5,7 @@ where each pixel is in grayscale scale, and can get an integer value from 0 to 2
 label is a digit between 0 and 9. The dataset has 70,000 images. Althought each image
 is square, we treat it as a vector of size 784.
 
-  1:
+  1.:
   **Question**:
   Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
   corresponding to the images (ii) a query image; and (iii) a number k. The function
@@ -17,7 +17,7 @@ is square, we treat it as a vector of size 784.
   **Answer**:
   See function "knn" in file "NearestNeighbor.py"
 
-  2:
+  2.:
   **Question**:
   Run the algorithm using the first n = 1000 training images, on each of the test
   images, using k = 10. What is the accuracy of the prediction (measured by 0-1
