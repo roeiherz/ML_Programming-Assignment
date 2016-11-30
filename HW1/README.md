@@ -7,8 +7,7 @@ where each pixel is in grayscale scale, and can get an integer value from 0 to 2
 label is a digit between 0 and 9. The dataset has 70,000 images. Althought each image
 is square, we treat it as a vector of size 784.
 
-Section A:
-
+### Section A:
 **Question**:
 Write a function that accepts as input: (i) a set of images; (ii) a vector of labels,
 corresponding to the images (ii) a query image; and (iii) a number k. The function
@@ -20,7 +19,7 @@ it will choose an arbitrary option
 **Answer**:
 See function "knn" in file "NearestNeighbor.py"
 
-Section B:
+### Section B:
 
 **Question**:
 Run the algorithm using the first n = 1000 training images, on each of the test
@@ -32,8 +31,7 @@ a completely random predictor?
 The accuracy of prediction of KNN with k=10 over 1000 training images (n=1000) is 0.157.
 We would expect from a completely random predicate accuracy of prediction of 0.1 (we have 10 different labels).
 
-Section C:
-
+### Section C:
 **Question**:
 Plot the prediction accuracy as a function of k, for k = 1, . . . , 100 and n = 1000.
 Discuss the results. What is the best k?
@@ -54,8 +52,7 @@ We would expect for such a behavior, since:
 2. The influence of each of the k nearest neighbors is equal (meaning that the nearest neighbors and the k nearest  neighbor will equally influence the result).
 Since that the training set is sparse (only 1000 images).
 
-Section D:
-
+### Section D:
 **Question**:
 Now we fix k to be the best k from before, and instead vary the number of training
 images. Plot the prediction accuracy as a function of n = 100, 200, . . . , 5000.
@@ -92,21 +89,18 @@ Assume that the points are sorted, so that 0 ≤ x1 < x2 < . . . < xm ≤ 1.
 
 We will now study the properties of the ERM algorithm for this class
 
-Section A:
-
+### Section A:
 Function "part_a" in file "UnionOfInterval.py"
 ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partA.png)
 
 The red lines are the intervals (the result of function "find_best_intervals" with k = 2.
 The blue lines are vertical lines is x=0.25, 0.5, 1.
 
-Section B:
-
+### Section B:
 Given the distribution, the hypothesis with the smallest error will be hypothesis of 2 intervals ((0, 0.25), (0.5, 0.75)).
 The error is 15% (2*0.25*0.2 + 2*0.25*0.1 = 0.15) 
 
-Section C:
-
+### Section C:
 True error function: "calc_true_error" in file "UnionOfInterval.py".
 The experiment function: "part_c" in file "UnionOfInterval.py".
 
@@ -120,8 +114,7 @@ The empirical error increasing when m grows. When m is small, there are small am
 In such a case the ERM overfits.
 The true error decreasing when m is grows. The true hypothesis best fit to the theoretical distribution. The samples will better reflect the theoretical distribution when m is big.
 
-Section D:
-
+### Section D:
 Function name "part_d_and_e(t = 1, file_name="partD.png")" in file "UnionOfInterval.py".
 
 ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/partD.png)
@@ -129,6 +122,5 @@ Function name "part_d_and_e(t = 1, file_name="partD.png")" in file "UnionOfInter
 The error decreasing when k growth. When single interval allows to reduce the error with at least one (when the error != 0 of course).
 K* will is any k bigger then 8. Of course K* is not a good choice since it overfits the samples.
 
-Section E:
-
+### Section E:
 Function name "part_d_and_e(t = 100, file_name="partE.png")" in file "UnionOfInterval.py".
