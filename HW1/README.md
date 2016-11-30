@@ -1,3 +1,4 @@
+# Results
 1.  In this question, we will study the performance of the Nearest
 Neighbor (NN) algorithm on the MNIST dataset. The MNIST dataset consists of
 images of handwritten digits, along with their labels. Each image has 28 × 28 pixels,
