@@ -1,4 +1,5 @@
-1.  In this question, we will study the performance of the Nearest
+1.  
+In this question, we will study the performance of the Nearest
 Neighbor (NN) algorithm on the MNIST dataset. The MNIST dataset consists of
 images of handwritten digits, along with their labels. Each image has 28 × 28 pixels,
 where each pixel is in grayscale scale, and can get an integer value from 0 to 255. Each
@@ -38,7 +39,6 @@ is square, we treat it as a vector of size 784.
     
     **Answer**:
     See function "get_accuracy_of_k" in file "NearestNeighbor.py"
-    Image file: " graph_N_fixed.png"
 
     ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/graph_N_fixed.png)
 
@@ -62,7 +62,6 @@ is square, we treat it as a vector of size 784.
     
     **Answer**:
     See function "get_accuracy_of_k" in file "NearestNeighbor.py"
-    Image file: " graph_K_fixed.png"
     ![alt tag](https://github.com/roeiherz/ML_Programming-Assignment/blob/master/HW1/graph_K_fixed.png)
 
 
@@ -70,7 +69,29 @@ is square, we treat it as a vector of size 784.
     We ran it with k=1 (the best results from above).
     This is the expected results, since it will be possible to find better (closer) single nearest neighbor which better reflect (statistically of course) the true label. 
 
-2.
+2. **Union of intervals** 
+In this question, we will study the hypothesis class of a finite
+union of disjoint intervals, discussed in class. 
+To review, let the sample space be
+X = [0, 1] and assume we study a binary classification problem, i.e. Y = {0, 1}. 
+We will try to learn using an hypothesis class that consists of k intervals. 
+More explicitly, let I = {[l1, u1], . . . , [lk, uk]} be k disjoint intervals, 
+such that 0 ≤ l1 ≤ u1 ≤ l2 ≤ u2 ≤. . . ≤ uk ≤ 1. 
+
+For each such k disjoint intervals, define the corresponding hypothesis as
+hI (x) = (1 if x ∈ [l1, u1], . . . , [lk, uk], 0 otherwise)
+
+Finally, define Hk as the hypothesis class that consists of all hypotheses that correspond
+to k disjoint intervals:
+Hk = {hI |I = {[l1, u1], . . . , [lk, uk]}, 0 ≤ l1 ≤ u1 ≤ l2 ≤ u2 ≤ . . . ≤ uk ≤ 1}
+
+We note that Hk ⊆ Hk+1, since we can always take one of the intervals to be of
+length 0 by setting its endpoints to be equal. 
+We are given a sample of size m = hx1, y1i, . . . ,hxn, ymi. 
+Assume that the points are sorted, so that 0 ≤ x1 < x2 < . . . < xm ≤ 1.
+
+We will now study the properties of the ERM algorithm for this class
+
 A:
 Function "part_a" in file "UnionOfInterval.py"
 The image file name: "partA.png"
