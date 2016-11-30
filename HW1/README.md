@@ -9,7 +9,7 @@ We would expect from a completely random predicate accuracy of prediction of 0.1
 C:
 See function "get_accuracy_of_k" in file "NearestNeighbor.py"
 Image file: " graph_N_fixed.png"
-![Alt text](/relative/path/to/graph_N_fixed.png?raw=true "Optional Title")
+![Alt text](/graph_N_fixed.png?raw=true "Optional Title")
 The best k is 1- (about the same accuracy).
 As we can see in the graph:
 for small Ks (1 to 3) we get the highest accuracy. We can see that the accuracy descend and approaches 0.1 when k growth.
