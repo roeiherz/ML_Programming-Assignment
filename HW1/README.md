@@ -69,7 +69,8 @@ is square, we treat it as a vector of size 784.
     We ran it with k=1 (the best results from above).
     This is the expected results, since it will be possible to find better (closer) single nearest neighbor which better reflect (statistically of course) the true label. 
 
-2. **Union of intervals** 
+2. 
+**Union of intervals** 
 In this question, we will study the hypothesis class of a finite
 union of disjoint intervals, discussed in class. 
 To review, let the sample space be
