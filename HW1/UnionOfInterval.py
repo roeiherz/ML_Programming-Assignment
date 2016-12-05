@@ -182,6 +182,7 @@ def part_c():
         avg_true_error_lst.append(avg_true_error)
         print "Avg TRUE error:{0}, Avg ERM error: {1}".format(avg_true_error, avg_erm_error)
 
+    plt.figure()
     plot_graph(avg_erm_error_lst, range(M_START, M_END + 1, M_STEP), file_name="partC", label="AVG ERM ERROR",
                title="Error as a function of number of samples", ylabel='Error', xlabel='Number of samples')
     plot_graph(avg_true_error_lst, range(M_START, M_END + 1, M_STEP), file_name="partC", label="AVG TRUE ERROR",
@@ -195,7 +196,7 @@ def part_d_and_e(t=100, file_name='', plot=True):
     :param file_name: file name to be saved
     :return:
     """
-    # Number of hypothesis (NOF intervals)
+    # NOF intervals
     K = 20
     # Number of iterations
     T = t
@@ -224,9 +225,10 @@ def part_d_and_e(t=100, file_name='', plot=True):
         print "Avg ERM error: {0} in k: {1}".format(avg_erm_error, k)
 
     if plot:
+        plt.figure()
         plot_graph(avg_erm_error_lst, range(1, K + 1), file_name=file_name,
-                   title="ERM Error as a function of number of hypothesis",
-                   ylabel='AVG ERM error', xlabel='Number of hypothesis')
+                   title="ERM Error as a function of number of intervals",
+                   ylabel='AVG ERM error', xlabel='Number of intervals')
 
     return intervals_lst
 
