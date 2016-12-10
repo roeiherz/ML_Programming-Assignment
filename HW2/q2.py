@@ -4,8 +4,9 @@ from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
 import matplotlib.pyplot as plt
-
+from sklearn.svm import LinearSVC
 from HW2.Perceptron import Perceptron
+import math
 
 NOF_ITERATIONS = 100
 
@@ -35,16 +36,33 @@ def get_train_validation_test_data():
     return train_data, train_labels, validation_data, validation_labels, test_data, test_labels
 
 
-def part_a(n_lst):
+def part_a(org_train, org_train_labels, org_validation, org_validation_labels):
     """
-    This function running the part A
-    :param n_lst: list of n
+    This function running the part A - training SVM on train samples
+    :param org_train: original train sample
+    :param org_train_labels: original train labels
+    :param org_validation: original validation samples
+    :param org_validation_labels: original validation labels
+    :return:
     """
-    for n in n_lst:
-        train = org_train[:n]
-        train_labels = org_train_labels[:n]
-        mean_acc = train_and_test(train, train_labels, org_test, org_test_labels)
-        print "n is: {0} and mean accuracy: {1}".format(n, mean_acc)
+
+    c_log_list = range(-10, 10, 1)
+    c_log_list2 = range(1, 100, 1)
+
+    # BEST C
+    # Accuracy is: 0.991167301697 for c:2e-07
+
+    for c_log in c_log_list2:
+        # c = math.pow(10, c_log)
+        c = float(c_log) * 1e-8
+        svm = LinearSVC(loss='hinge', fit_intercept=False, C=c)
+        svm.fit(org_train, org_train_labels)
+        predication = svm.predict(org_validation)
+        error_lst = (org_validation_labels != predication)
+        error = np.sum(error_lst)
+        acc = 1 - float(error) / np.size(predication)
+        print "Accuracy is: {0} for c:{1}".format(acc, c)
+    print 'debug'
 
 
 def train_and_test(train, train_labels, test, test_labels):
@@ -128,9 +146,10 @@ if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels, org_validation, org_validation_labels, org_test, org_test_labels = get_train_validation_test_data()
 
-    # part_a(n_lst)
+    part_a(org_train, org_train_labels, org_validation, org_validation_labels)
 
-    perceptron = part_b(org_train, org_train_labels)
-    part_c(perceptron, org_test, org_test_labels)
+    # perceptron = part_b(org_train, org_train_labels)
+    # part_c(perceptron, org_test, org_test_labels)
     # part_d(perceptron, org_test, org_test_labels)
 
+    print 'debug'
