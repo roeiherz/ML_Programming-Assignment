@@ -3,8 +3,8 @@ import numpy.random
 from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
-import matplotlib
-matplotlib.use('Agg')
+# import matplotlib
+# matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 from HW2.Perceptron import Perceptron
@@ -100,8 +100,8 @@ def part_a(org_train, org_train_labels, org_validation, org_validation_labels):
         validating_acc_lst.append(validating_acc)
 
     plt.figure()
-    plot_graph(training_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
-    plot_graph(validating_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
+    # plot_graph(training_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
+    # plot_graph(validating_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
     best_acc_indx = validating_acc_lst.index(max(validating_acc_lst))
     best_c = c_list[best_acc_indx]
     print "The best c is {} for error: {}".format(best_c, max(validating_acc_lst))
