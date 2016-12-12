@@ -3,10 +3,11 @@ import numpy.random
 from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 from HW2.Perceptron import Perceptron
-import math
 
 NOF_ITERATIONS = 100
 
@@ -36,6 +37,40 @@ def get_train_validation_test_data():
     return train_data, train_labels, validation_data, validation_labels, test_data, test_labels
 
 
+def calc_accuracy(svm, dataset, dataset_labels):
+    """
+    This function receives dataset and dataset labels and calculates its svm accuracy
+    :param svm: svm object
+    :param dataset: dataset
+    :param dataset_labels: dataset labels
+    :return: accuracy
+    """
+
+    predication = svm.predict(dataset)
+    error_lst = (dataset_labels != predication)
+    error = np.sum(error_lst)
+    acc = 1 - float(error) / np.size(predication)
+    return acc
+
+
+def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xlabel=''):
+    """
+    This function is plotting the graph
+    :param label: for plotting legend
+    :param title: title for the plotting
+    :param ylabel: ylabel for the plotting
+    :param xlabel: xlabel for the plotting
+    :param error_lst: the of errors
+    :param x_lst: list of the number of samples
+    :param file_name: file_name to be saved
+    """
+    plt.plot(x_lst, error_lst, label=label)
+    plt.title(title)
+    plt.ylabel(ylabel)
+    plt.xlabel(xlabel)
+    plt.savefig('{}.png'.format(file_name))
+
+
 def part_a(org_train, org_train_labels, org_validation, org_validation_labels):
     """
     This function running the part A - training SVM on train samples
@@ -46,22 +81,33 @@ def part_a(org_train, org_train_labels, org_validation, org_validation_labels):
     :return:
     """
 
-    c_log_list = range(-10, 10, 1)
-    c_log_list2 = range(1, 100, 1)
+    c_list = np.array(list(range(1, 500, 5))).astype("float32") * 1e-8
 
     # BEST C
     # Accuracy is: 0.991167301697 for c:2e-07
 
-    for c_log in c_log_list2:
+    training_acc_lst = []
+    validating_acc_lst = []
+
+    for c in c_list:
         # c = math.pow(10, c_log)
-        c = float(c_log) * 1e-8
         svm = LinearSVC(loss='hinge', fit_intercept=False, C=c)
         svm.fit(org_train, org_train_labels)
-        predication = svm.predict(org_validation)
-        error_lst = (org_validation_labels != predication)
-        error = np.sum(error_lst)
-        acc = 1 - float(error) / np.size(predication)
-        print "Accuracy is: {0} for c:{1}".format(acc, c)
+
+        training_acc = calc_accuracy(svm, org_train, org_train_labels)
+        training_acc_lst.append(training_acc)
+        validating_acc = calc_accuracy(svm, org_validation, org_validation_labels)
+        validating_acc_lst.append(validating_acc)
+
+    plt.figure()
+    plot_graph(training_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
+    plot_graph(validating_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
+    best_acc_indx = validating_acc_lst.index(max(validating_acc_lst))
+    best_c = c_list[best_acc_indx]
+    print "The best c is {} for error: {}".format(best_c, max(validating_acc_lst))
+
+    plt.figure()
+    plt.imshow(np.reshape(svm.coef_, (28, 28)), interpolation='nearest', cmap='gray')
     print 'debug'
 
 
