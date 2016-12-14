@@ -6,7 +6,10 @@ __author__ = 'roeiherz'
 class Perceptron(object):
 
     def __init__(self, num_of_features=None):
-
+        """
+        We initialize the weights and the bias
+        :param num_of_features: number of features
+        """
         if num_of_features is None:
             print "You must give a number for the number of features"
         else:

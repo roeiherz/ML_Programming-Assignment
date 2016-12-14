@@ -93,7 +93,7 @@ if __name__ == '__main__':
     plot_graph(validating_acc_lst, c_list, "q2_part_a", "", "Accuracy vs C for SVM", "Accuracy", "C")
     best_acc_indx = validating_acc_lst.index(max(validating_acc_lst))
     best_c = c_list[best_acc_indx]
-    print "The best c is {} for error: {}".format(best_c, max(validating_acc_lst))
+    print "The best c is {} for accuracy: {}".format(best_c, max(validating_acc_lst))
 
     plt.figure()
     plt.imshow(np.reshape(svm.coef_, (28, 28)), interpolation='nearest')
