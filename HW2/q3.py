@@ -122,21 +122,23 @@ def part_c(org_train, org_train_labels, best_c, best_lr):
     This function implements part C
     :param best_c: Best C
     :param best_lr: Best Learning rate
-    :return:
+    :return: the SVM
     """
     svm = SVM(org_train.shape[1])
     svm.train(org_train, org_train_labels, best_lr, C=best_c, T=20000)
-    acc = svm.test(org_validation, org_validation_labels)
-    print "The Accuracy is: {} for best C: {} and learning rate: {}".format(acc, best_c, best_lr)
-    return svm.get_weights()
+
+    # Save the weights image
+    plt.figure()
+    plt.imshow(np.reshape(svm.get_weights(), (28, 28)), interpolation='nearest')
+    return svm
 
 
-def part_d(weights):
+def part_d(svm, org_test, org_test_labels, best_c, best_lr):
     """
     This function implements part D
     """
-    plt.figure()
-    plt.imshow(np.reshape(weights, (28, 28)), interpolation='nearest')
+    acc = svm.test(org_test, org_test_labels)
+    print "The Accuracy is: {} for best C: {} and learning rate: {}".format(acc, best_c, best_lr)
 
 
 if __name__ == '__main__':
@@ -144,11 +146,9 @@ if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels, org_validation, org_validation_labels, org_test, org_test_labels = get_train_validation_test_data()
 
-    # best_lr = part_a(org_train, org_train_labels)
-    best_lr = 0.94
+    best_lr = part_a(org_train, org_train_labels)
+    # best_lr = 0.94
     best_c = part_b(org_train, org_train_labels, best_lr)
-    print 'debug'
-    weights = part_c(org_train, org_train_labels, best_c, best_lr)
-    print 'debug'
-    part_d(weights)
+    svm = part_c(org_train, org_train_labels, best_c, best_lr)
+    part_d(svm, org_test, org_test_labels, best_c, best_lr)
     print 'debug'
