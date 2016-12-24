@@ -1,0 +1,43 @@
+Students:
+1. Moshe Raboh, 300611878, shikorab@gmail.com
+2. Roei Herzig, 300360310, roeiherzig@mail.tau.ac.il
+
+Files:
+1. Perceptron.py
+    Description:
+    Source file with basic implemetation of preceptron and some related utilities (used by question 1)
+2. q1.py
+    Description:
+    source file with all the relevant code for question 1 (all sections)
+    The main function of this file running all the relevant function in order to generate the required output.
+    section a: see function "part_a"
+    section b: see function "part_b",
+               generate plot to file "part_1b.png" which include the the view of matrix weights
+    section c: see function "part_c"
+    section d: see function "part_d",
+               generate plot to file "part_1d_rotat0.png" and "part_1d_rotat8.png" which include misclassified example
+    Command: "/usr/bin/python q1.py" (for all sections together)
+    Note: the output file were already saved in nove.
+3. q2.py
+    Description:
+    source file with all the relevant code for question 2 (all sections)
+    part a: included in main function. generate image "q2_part_a.png" of accuracy vs C of both training set and validation set.
+    part c: included in main function. generate view of the matrix weights.
+    part d: included in the main function
+    Command: "/usr/bin/python q2.py" (for all sections together) 
+    Note: the output file were already saved in nove.
+4. SVM.py
+    Description:
+    Source file with basic implemetation of SVM and some related utilities (used by question 3)
+5. q3.py    
+   Description:
+    source file with all the relevant code for question 2 (all sections)
+    part a: see function "part_a", generate image "q3_part_a.png" of accuracy vs learning rate of SVM.
+    part b: see function "part_a", generate image "q3_part_b.png" of accuracy vs C of SVM.
+    part b: see function "part_c", generate image "q3_part_c.png" view the matrix weights of SVM.
+    part d: see function "part_d".
+    Command: "/usr/bin/python q3.py" (for all sections together)
+    Note: the output file were already saved in nove.
+6. EX2.docx -
+    Description:
+    the submitted file relevant for programming assignment.

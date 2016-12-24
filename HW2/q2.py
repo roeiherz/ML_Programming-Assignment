@@ -3,8 +3,8 @@ import numpy.random
 from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
-# import matplotlib
-# matplotlib.use('Agg')
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 

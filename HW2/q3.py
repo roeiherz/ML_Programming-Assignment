@@ -3,12 +3,12 @@ import numpy.random
 from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
-# import matplotlib
-# matplotlib.use('Agg')
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.svm import LinearSVC
 
-from HW2.SVM import SVM
+from SVM import SVM
 
 
 def get_train_validation_test_data():
@@ -75,6 +75,7 @@ def part_a(org_train, org_train_labels):
     This function calculates part A
     :return: best learning rate
     """
+    print "part a - start"
     learning_rate_lst = np.array(list(range(1, 99, 1))).astype("float32") / 100.0
 
     validating_acc_lst = []
@@ -91,6 +92,7 @@ def part_a(org_train, org_train_labels):
     best_acc_indx = validating_acc_lst.index(max(validating_acc_lst))
     best_lr = learning_rate_lst[best_acc_indx]
     print "The best learning rate is {} for accuracy: {}".format(best_lr, max(validating_acc_lst))
+    print "part a - done"
     return best_lr
 
 
@@ -99,6 +101,7 @@ def part_b(org_train, org_train_labels, best_lr):
     This function implements part B
     :return: best learning rate
     """
+    print "part b - start"
     c_lst = np.array(list(range(1, 999, 10))).astype("float32") / 1000.0
 
     validating_acc_lst = []
@@ -114,6 +117,7 @@ def part_b(org_train, org_train_labels, best_lr):
     best_acc_indx = validating_acc_lst.index(max(validating_acc_lst))
     best_c = c_lst[best_acc_indx]
     print "The best C is {} for accuracy: {}".format(best_c, max(validating_acc_lst))
+    print "part b - done"
     return best_c
 
 
@@ -124,12 +128,14 @@ def part_c(org_train, org_train_labels, best_c, best_lr):
     :param best_lr: Best Learning rate
     :return: the SVM
     """
+    print "part c - start"
     svm = SVM(org_train.shape[1])
     svm.train(org_train, org_train_labels, best_lr, C=best_c, T=20000)
 
     # Save the weights image
     plt.figure()
     plt.imshow(np.reshape(svm.get_weights(), (28, 28)), interpolation='nearest')
+    print "part c - done"
     return svm
 
 
@@ -137,9 +143,10 @@ def part_d(svm, org_test, org_test_labels, best_c, best_lr):
     """
     This function implements part D
     """
+    print "part d - start"
     acc = svm.test(org_test, org_test_labels)
     print "The Accuracy is: {} for best C: {} and learning rate: {}".format(acc, best_c, best_lr)
-
+    print "part d - done"
 
 if __name__ == '__main__':
 
@@ -147,8 +154,6 @@ if __name__ == '__main__':
     org_train, org_train_labels, org_validation, org_validation_labels, org_test, org_test_labels = get_train_validation_test_data()
 
     best_lr = part_a(org_train, org_train_labels)
-    # best_lr = 0.94
     best_c = part_b(org_train, org_train_labels, best_lr)
     svm = part_c(org_train, org_train_labels, best_c, best_lr)
     part_d(svm, org_test, org_test_labels, best_c, best_lr)
-    print 'debug'

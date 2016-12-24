@@ -3,9 +3,11 @@ import numpy.random
 from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-from HW2.Perceptron import Perceptron
+from Perceptron import Perceptron
 
 NOF_ITERATIONS = 100
 
@@ -40,12 +42,13 @@ def part_a(n_lst):
     This function running the part A
     :param n_lst: list of n
     """
+    print "part a - start"
     for n in n_lst:
         train = org_train[:n]
         train_labels = org_train_labels[:n]
         mean_acc = train_and_test(train, train_labels, org_test, org_test_labels)
         print "n is: {0} and mean accuracy: {1}".format(n, mean_acc)
-
+    print "part a - done"
 
 def train_and_test(train, train_labels, test, test_labels):
     """
@@ -83,13 +86,14 @@ def part_b(org_train, org_train_labels):
     :param org_train_labels: original train labels
     :return: perceptron
     """
-
+    print "part b - start"
     nof_features = org_train.shape[1]
     perceptron = Perceptron(nof_features)
     perceptron.train(org_train, org_train_labels)
     weights = perceptron.get_weights()
     plt.figure()
     plt.imshow(np.reshape(weights, (28, 28)), interpolation='nearest')
+    print "part b - done"
     return perceptron
 
 
@@ -101,10 +105,10 @@ def part_c(perceptron, test, test_labels):
     :param test_labels:
     :return:
     """
-
+    print "part c - start"
     mean_acc = perceptron.test(test, test_labels)
     print "Mean accuracy of the full train samples: {}".format(mean_acc)
-
+    print "part c - done"
 
 def part_d(perceptron, test, test_labels):
     """
@@ -114,13 +118,13 @@ def part_d(perceptron, test, test_labels):
     :param test_labels: test labels
     :return:
     """
-
+    print "part d - start"
     # Get the misclassified samples and labels
     misclassified_samples, misclassified_labels = perceptron.find_misclassified_samples(test, test_labels)
     # Plot the misclassified samples
     plt.figure()
     plt.imshow(np.reshape(misclassified_samples[1], (28, 28)), interpolation='nearest', cmap='gray')
-
+    print "part d - done"
 
 if __name__ == '__main__':
     n_lst = [5, 10, 50, 100, 500, 1000, 5000]
@@ -128,9 +132,9 @@ if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels, org_validation, org_validation_labels, org_test, org_test_labels = get_train_validation_test_data()
 
-    # part_a(n_lst)
+    part_a(n_lst)
 
     perceptron = part_b(org_train, org_train_labels)
     part_c(perceptron, org_test, org_test_labels)
-    # part_d(perceptron, org_test, org_test_labels)
+    part_d(perceptron, org_test, org_test_labels)
 
