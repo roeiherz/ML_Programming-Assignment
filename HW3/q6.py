@@ -10,7 +10,6 @@ from MultiClassSVM import MultiClassSVM
 import matplotlib.pyplot as plt
 
 NOF_ITERS = 1000
-
 ITERS = 2
 
 
@@ -154,7 +153,7 @@ def part_a(org_train, org_train_labels, org_validation, org_validation_labels):
 
 def part_b(best_lr, best_c, org_train, org_train_labels, t=NOF_ITERS):
     """
-
+    This function implements part B
     :param best_lr: best learning
     :param best_c: best C
     :param org_train: original train data
@@ -197,4 +196,4 @@ if __name__ == '__main__':
     best_lr, best_c = part_a(org_train, org_train_labels, org_validation, org_validation_labels)
     mc_svm = part_b(best_lr, best_c, org_train, org_train_labels, t=NOF_ITERS)
     part_c(org_test, org_test_labels, mc_svm)
-    print 'debug'
+    print 'end'
