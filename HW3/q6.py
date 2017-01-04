@@ -9,8 +9,8 @@ from MultiClassSVM import MultiClassSVM
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-NOF_ITERS = 1000
-ITERS = 2
+NOF_ITERS = 30000
+ITERS = 5
 
 
 def get_train_validation_test_data():
