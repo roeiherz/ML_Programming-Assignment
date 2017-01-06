@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 __author__ = 'roeiherz'
 
@@ -16,6 +17,7 @@ class SVM(object):
 
         if num_of_features is None:
             print "You must give a number for the number of features"
+            exit()
         else:
             self._Weights = np.zeros(num_of_features)
             # No bias

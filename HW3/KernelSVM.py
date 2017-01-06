@@ -8,7 +8,7 @@ class KernelSVM(object):
     This class is our Kernel implementation using SGD as discussed in class
     """
 
-    def __init__(self, max_samples_size=None, kernel='quadratic'):
+    def __init__(self, max_samples_size=None, kernel='linear'):
         """
         We initialize the weights and the bias
         :param kernel: the kernel function
@@ -17,10 +17,14 @@ class KernelSVM(object):
         if kernel == 'quadratic':
             self._kernel = self._quad_kernel
 
+        if kernel == 'linear':
+            self._kernel = self._linear_kernel
+
         self._misclassified_cnt = 0
 
         if max_samples_size is None:
             print "You must give a number for maximum sample size"
+            exit()
         else:
             self._ai = np.zeros(max_samples_size)
             self._xi_lst = []
@@ -42,7 +46,7 @@ class KernelSVM(object):
             label = labels[rand_sample_indx]
             learning_rate_per_itr = float(learning_rate) / index
 
-            if label * self.predict_single(x) < 1:
+            if label * self.predict(x) < 1:
                 # Update upon fail
                 self._ai[0:self._misclassified_cnt] *= (1 - learning_rate_per_itr)
                 self._ai[self._misclassified_cnt] = learning_rate_per_itr * C * label
@@ -72,33 +76,41 @@ class KernelSVM(object):
         """
         return self._xi_lst
 
-    def predict(self, samples):
-        """
-        This function predicts the label for each samples
-        :param samples: samples data
-        :return: label
-        """
-        return
-
-    def predict_single(self, sample):
+    def predict(self, sample):
         """
         This function predict the label for a single sample
-        :param sample: sampla data
+        :param sample: sample data
         :return: prediction value (float)
         """
 
         if self._misclassified_cnt != len(self._xi_lst):
             print 'Error between the size of the np array and list'
-        prediction_arr = [self._kernel(x, sample) for x in self._xi_lst] * self._ai[:self._misclassified_cnt]
-        return np.sum(prediction_arr)
+        prediction_arr = self._ai[:self._misclassified_cnt] * self._kernel(sample)
+        return np.sum(prediction_arr, axis=len(prediction_arr.shape)-1)
 
-    @staticmethod
-    def _quad_kernel(x, xx):
+    def _quad_kernel(self, xx):
         """
         This function will implements a quadratic SVM Kernel = (1+x*x')^2
-        :param x: numpy array which represents x
         :param xx: numpy array which represents x'
-        :return:
+        :return: matrix with size: (nof_mistakes, nof_xx)
         """
 
+        if self._misclassified_cnt == 0:
+            return 0
+
+        dot_product = np.dot(np.array(self._xi_lst), xx.transpose()) + 1
+        return np.square(dot_product).transpose()
+
+    def _linear_kernel(self, xx):
+        """
+        This function will implements a linear SVM Kernel = x*x'
+        :param xx: numpy array which represents x'
+        :return: matrix with size: (nof_mistakes, nof_xx)
+        """
+
+        if self._misclassified_cnt == 0:
+            return 0
+
+        dot_product = np.dot(np.array(self._xi_lst), xx.transpose())
+        return dot_product.transpose()
 

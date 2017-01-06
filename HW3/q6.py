@@ -9,8 +9,8 @@ from MultiClassSVM import MultiClassSVM
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-NOF_ITERS = 30000
-ITERS = 5
+NOF_ITERS = 3000
+ITERS = 3
 
 
 def get_train_validation_test_data():
@@ -73,14 +73,14 @@ def find_best_c(org_train, org_train_labels, org_validation, org_validation_labe
     """
 
     # We used grid search to reduce the range
-    c_list = np.array(list(range(400, 500, 5))).astype("float32") * 1e-8
+    c_list = np.array(list(range(400, 800, 5))).astype("float32") * 1e-8
     training_mean_acc_lst = []
     validating_mean_acc_lst = []
     for c in c_list:
         training_acc = 0
         validation_acc = 0
         for i in range(nof_iters):
-            mc_svm = MultiClassSVM(org_train[0].shape[0], 10)
+            mc_svm = MultiClassSVM(num_of_features=org_train[0].shape[0], num_of_classes=10)
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
             training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
@@ -111,14 +111,14 @@ def find_best_lr(org_train, org_train_labels, org_validation, org_validation_lab
     """
 
     # We used grid search to reduce the range
-    lr_list = np.array(list(range(60, 99, 1))).astype("float32") / 100.0
+    lr_list = np.array(list(range(800, 900, 1))).astype("float32") / 100.0
     training_mean_acc_lst = []
     validating_mean_acc_lst = []
     for lr in lr_list:
         training_acc = 0
         validation_acc = 0
         for i in range(nof_iters):
-            mc_svm = MultiClassSVM(org_train[0].shape[0], 10)
+            mc_svm = MultiClassSVM(num_of_features=org_train[0].shape[0], num_of_classes=10)
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
             training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
@@ -162,7 +162,7 @@ def part_b(best_lr, best_c, org_train, org_train_labels, t=NOF_ITERS):
     :return: multi class svm
     """
 
-    mc_svm = MultiClassSVM(org_train[0].shape[0], 10)
+    mc_svm = MultiClassSVM(num_of_features=org_train[0].shape[0], num_of_classes=10)
     mc_svm.train(org_train, org_train_labels, learning_rate=best_lr, C=best_c, T=t)
     svm_lst = mc_svm.get_svm_lst()
 
