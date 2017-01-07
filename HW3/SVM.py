@@ -36,7 +36,7 @@ class SVM(object):
         """
         return np.dot(samples, self._Weights)
 
-    def update(self, x, learning_rate_step, C):
+    def update(self, sign, x, learning_rate_step, C):
         """
         This function trains the KernelSVM algorithm. It updates the misclassified xi list only when we are mistaking
         :param learning_rate_step: learning rate
@@ -46,7 +46,7 @@ class SVM(object):
 
         # Increment fields
         if x is None:
-            self._Weights = (1 - learning_rate_step) * self._Weights
+            self._Weights *= (1 - learning_rate_step)
         else:
-            self._Weights = (1 - learning_rate_step) * self._Weights + learning_rate_step * C * x
+            self._Weights = (1 - learning_rate_step) * self._Weights + learning_rate_step * C * x * sign
 
