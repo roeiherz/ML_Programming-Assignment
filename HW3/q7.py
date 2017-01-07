@@ -12,13 +12,13 @@ import matplotlib.pyplot as plt
 
 # C Grid search params
 C_STEP = 5
-C_HIGH_THR = 130
-C_LOW_THR = 60
+C_HIGH_THR = 150
+C_LOW_THR = 80
 
 # LR Grid search params
 LR_STEP = 10
-LR_HIGH_THR = 200
-LR_LOW_THR = 100
+LR_HIGH_THR = 350
+LR_LOW_THR = 250
 
 # Training params
 NOF_ITERS = 5000
