@@ -20,10 +20,10 @@ class KernelSVM(object):
         # kernel method
         if kernel == 'quadratic':
             self._kernel = self._quad_kernel
-            print 'You choose a quadratic kernel'
+            # print 'Debug: You choose a quadratic kernel'
         elif kernel == 'linear':
             self._kernel = self._linear_kernel
-            print 'You choose a linear kernel'
+            # print 'Debug: You choose a linear kernel'
         else:
             print "Kernel not supported"
             exit()

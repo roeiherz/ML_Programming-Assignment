@@ -12,17 +12,17 @@ import matplotlib.pyplot as plt
 
 # C Grid search params
 C_STEP = 5
-C_HIGH_THR = 150
-C_LOW_THR = 80
+C_HIGH_THR = 130
+C_LOW_THR = 60
 
 # LR Grid search params
-LR_STEP = 5
-LR_HIGH_THR = 150
-LR_LOW_THR = 80
+LR_STEP = 10
+LR_HIGH_THR = 200
+LR_LOW_THR = 100
 
 # Training params
-NOF_ITERS = 3000
-ITERS = 1
+NOF_ITERS = 5000
+ITERS = 2
 
 
 def get_train_validation_test_data():
