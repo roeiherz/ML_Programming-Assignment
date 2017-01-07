@@ -4,13 +4,15 @@ from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
 import numpy as np
+
+from MultiClassKernelSVM import MultiClassKernelSVM
 from MultiClassSVM import MultiClassSVM
 # import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-NOF_ITERS = 3000
-ITERS = 2
+NOF_ITERS = 1000
+ITERS = 1
 
 
 def get_train_validation_test_data():
@@ -28,8 +30,8 @@ def get_train_validation_test_data():
     train_data_unscaled = data[train_idx[:train_data_size], :].astype(float)
     train_labels = labels[train_idx[:train_data_size]]
 
-    validation_data_unscaled = data[train_idx[train_data_size:60000], :].astype(float)
-    validation_labels = labels[train_idx[train_data_size:60000]]
+    validation_data_unscaled = data[train_idx[train_data_size:51000], :].astype(float)
+    validation_labels = labels[train_idx[train_data_size:51000]]
 
     test_data_unscaled = data[60000:, :].astype(float)
     test_labels = labels[60000:]
@@ -73,24 +75,24 @@ def find_best_c(org_train, org_train_labels, org_validation, org_validation_labe
     """
 
     # We used grid search to reduce the range
-    c_list = np.array(list(range(500, 700, 10))).astype("float32") * 1e-8
+    c_list = np.array(list(range(400, 700, 10))).astype("float32") * 1e-8
     training_mean_acc_lst = []
     validating_mean_acc_lst = []
     for c in c_list:
         training_acc = 0
         validation_acc = 0
         for i in range(nof_iters):
-            mc_svm = MultiClassSVM(max_samples_size=org_train.shape[0], num_of_classes=10, use_kernel=True)
+            mc_svm = MultiClassKernelSVM(max_samples_size=org_train.shape[0], num_of_classes=10)
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
-            training_acc += mc_svm.test(org_train, org_train_labels)
+            #training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
 
         training_mean_acc_lst.append(training_acc / float(nof_iters))
         validating_mean_acc_lst.append(validation_acc / float(nof_iters))
     plt.figure()
-    plot_graph(validating_mean_acc_lst, c_list, "q7_part_a1", "", "Accuracy vs C for MultiClassSVM", "Accuracy",
+    plot_graph(validating_mean_acc_lst, c_list, "q7_part_a2", "", "Accuracy vs C for MultiClassSVM", "Accuracy",
                "C")
-    plot_graph(training_mean_acc_lst, c_list, "q7_part_a1", "", "Accuracy vs C for MultiClassSVM", "Accuracy",
+    plot_graph(training_mean_acc_lst, c_list, "q7_part_a2", "", "Accuracy vs C for MultiClassSVM", "Accuracy",
                "C")
     best_acc_indx = validating_mean_acc_lst.index(max(validating_mean_acc_lst))
 
@@ -111,24 +113,24 @@ def find_best_lr(org_train, org_train_labels, org_validation, org_validation_lab
     """
 
     # We used grid search to reduce the range
-    lr_list = np.array(list(range(90, 150, 2))).astype("float32") / 100.0
+    lr_list = np.array(list(range(70, 120, 2))).astype("float32") / 100.0
     training_mean_acc_lst = []
     validating_mean_acc_lst = []
     for lr in lr_list:
         training_acc = 0
         validation_acc = 0
         for i in range(nof_iters):
-            mc_svm = MultiClassSVM(max_samples_size=org_train.shape[0], num_of_classes=10, use_kernel=True)
+            mc_svm = MultiClassKernelSVM(max_samples_size=org_train.shape[0], num_of_classes=10)
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
-            training_acc += mc_svm.test(org_train, org_train_labels)
+            #training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
 
         training_mean_acc_lst.append(training_acc / float(nof_iters))
         validating_mean_acc_lst.append(validation_acc / float(nof_iters))
     plt.figure()
-    plot_graph(validating_mean_acc_lst, lr_list, "q7_part_a2", "", "Accuracy vs Learning Rate for MultiClassSVM",
+    plot_graph(validating_mean_acc_lst, lr_list, "q7_part_a1", "", "Accuracy vs Learning Rate for MultiClassSVM",
                "Accuracy", "Learning Rate")
-    plot_graph(training_mean_acc_lst, lr_list, "q7_part_a2", "", "Accuracy vs Learning Rate for MultiClassSVM",
+    plot_graph(training_mean_acc_lst, lr_list, "q7_part_a1", "", "Accuracy vs Learning Rate for MultiClassSVM",
                "Accuracy", "Learning Rate")
     best_acc_indx = validating_mean_acc_lst.index(max(validating_mean_acc_lst))
 
@@ -164,7 +166,7 @@ def part_b(best_lr, best_c, org_train, org_train_labels, org_test, org_test_labe
     :return: multi class svm
     """
 
-    mc_svm = MultiClassSVM(org_train[0].shape[0], 10)
+    mc_svm = MultiClassKernelSVM(max_samples_size=org_train.shape[0], num_of_classes=10)
     mc_svm.train(org_train, org_train_labels, learning_rate=best_lr, C=best_c, T=t)
     acc = mc_svm.test(org_test, org_test_labels)
     print 'This is the accuracy from the test data: {}'.format(acc)

@@ -1,6 +1,6 @@
 import numpy as np
 
-from HW3.KernelSVM import KernelSVM
+from KernelSVM import KernelSVM
 from SVM import SVM
 
 __author__ = 'roeiherz_mosherabu'
