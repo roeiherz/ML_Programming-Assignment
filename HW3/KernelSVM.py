@@ -1,51 +1,54 @@
 import numpy as np
 
+
 class KernelSVM(object):
     """
     This class is our Kernel implementation using SGD as discussed in class
     """
 
-    def __init__(self, max_samples_size=None, num_of_classes=10, kernel='linear'):
+    def __init__(self, max_samples_size=None, kernel='quadratic'):
         """
         We initialize the weights and the bias
         :param kernel: the kernel function
         """
-        #max number of samples to train
+        # max number of samples to train
         if max_samples_size is None:
             print "You must give a number for maximum sample size"
             exit()
         self._max_sample_size = max_samples_size
 
-        #kernel method
+        # kernel method
         if kernel == 'quadratic':
             self._kernel = self._quad_kernel
-        if kernel == 'linear':
+            print 'You choose a quadratic kernel'
+        elif kernel == 'linear':
             self._kernel = self._linear_kernel
+            print 'You choose a linear kernel'
         else:
             print "Kernel not supported"
             exit()
 
-        #init local members
+        # Init object members
         self._misclassified_cnt = 0
         self._misclassified_coeffs = np.zeros(max_samples_size)
         self._misclassified_list = []
 
-    def increment(self, x, learning_rate_step, C):
+    def update(self, x, learning_rate_step, C):
         """
         This function trains the KernelSVM algorithm. It updates the misclassified xi list only when we are mistaking
-        :param T: Iterations
-        :param learning_rate: learning rate
+        :param learning_rate_step: learning rate
         :param C: punishment parameter for SVM
-        :param xs: array of samples
-        :param labels: array of labels
+        :param x: sample
         """
 
-        # Increment fields
+        # update fields
         self._misclassified_coeffs[0:self._misclassified_cnt] *= (1 - learning_rate_step)
+        if x is None:
+            # When we update the others there is no need to append to misclassified_list
+            return
         self._misclassified_coeffs[self._misclassified_cnt] = learning_rate_step * C
         self._misclassified_list.append(x)
         self._misclassified_cnt += 1
-
 
     def get_misclassified_xis(self):
         """
@@ -66,7 +69,7 @@ class KernelSVM(object):
             else:
                 return np.zeros(sample.shape[0])
         prediction_arr = self._misclassified_coeffs[:self._misclassified_cnt] * self._kernel(sample)
-        return np.sum(prediction_arr, axis=len(prediction_arr.shape)-1)
+        return np.sum(prediction_arr, axis=len(prediction_arr.shape) - 1)
 
     def _quad_kernel(self, xx):
         """
@@ -93,4 +96,3 @@ class KernelSVM(object):
 
         dot_product = np.dot(np.array(self._misclassified_list), xx.transpose())
         return dot_product.transpose()
-

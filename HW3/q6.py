@@ -5,12 +5,22 @@ import sklearn.preprocessing
 import os
 import numpy as np
 from MultiClassSVM import MultiClassSVM
-from MultiClassKernelSVM import MultiClassKernelSVM
 # import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-NOF_ITERS = 3000
+# C Grid search params
+C_STEP = 5
+C_HIGH_THR = 150
+C_LOW_THR = 80
+
+# LR Grid search params
+LR_STEP = 5
+LR_HIGH_THR = 200
+LR_LOW_THR = 100
+
+# Training params
+NOF_ITERS = 10000
 ITERS = 3
 
 
@@ -74,14 +84,14 @@ def find_best_c(org_train, org_train_labels, org_validation, org_validation_labe
     """
 
     # We used grid search to reduce the range
-    c_list = np.array(list(range(400, 800, 5))).astype("float32") * 1e-8
+    c_list = np.array(list(range(C_LOW_THR, C_HIGH_THR, C_STEP))).astype("float32") / 100
     training_mean_acc_lst = []
     validating_mean_acc_lst = []
     for c in c_list:
         training_acc = 0
         validation_acc = 0
         for i in range(nof_iters):
-            mc_svm = MultiClassKernelSVM(num_of_features=org_train[0].shape[0], num_of_classes=10, kernel="none")
+            mc_svm = MultiClassSVM(num_of_features=org_train[0].shape[0], num_of_classes=10, kernel="none")
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
             training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
@@ -112,14 +122,14 @@ def find_best_lr(org_train, org_train_labels, org_validation, org_validation_lab
     """
 
     # We used grid search to reduce the range
-    lr_list = np.array(list(range(800, 900, 1))).astype("float32") / 100.0
+    lr_list = np.array(list(range(LR_LOW_THR, LR_HIGH_THR, LR_STEP))).astype("float32") / 100.0
     training_mean_acc_lst = []
     validating_mean_acc_lst = []
     for lr in lr_list:
         training_acc = 0
         validation_acc = 0
         for i in range(nof_iters):
-            mc_svm = MultiClassKernelSVM(num_of_features=org_train[0].shape[0], num_of_classes=10, kernel="none")
+            mc_svm = MultiClassSVM(num_of_features=org_train[0].shape[0], num_of_classes=10, kernel="none")
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
             training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
@@ -163,7 +173,7 @@ def part_b(best_lr, best_c, org_train, org_train_labels, t=NOF_ITERS):
     :return: multi class svm
     """
 
-    mc_svm = MultiClassKernelSVM(num_of_features=org_train[0].shape[0], num_of_classes=10, kernel="none")
+    mc_svm = MultiClassSVM(num_of_features=org_train[0].shape[0], num_of_classes=10, kernel="none")
     mc_svm.train(org_train, org_train_labels, learning_rate=best_lr, C=best_c, T=t)
     svm_lst = mc_svm.get_svm_lst()
 
