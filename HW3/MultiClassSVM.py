@@ -57,14 +57,14 @@ class MultiClassSVM(object):
             if max_delta > -1:
                 # Update all wj's that gives max wj*x - wy*x --> incr -x
                 for max_class in max_classes:
-                    self._svm_lst[max_class].update(-1 * x, learning_rate_per_itr, C)
+                    self._svm_lst[max_class].update(-1, x, learning_rate_per_itr, C)
                 # Update wy  --> incr +x
-                self._svm_lst[label].update(x, learning_rate_per_itr, C)
+                self._svm_lst[label].update(1, x, learning_rate_per_itr, C)
                 # Update others  --> incr 0
                 for i in range(0, self._num_of_classes):
                     if i in max_classes or i == label:
                         continue
-                    self._svm_lst[i].update(None, learning_rate_per_itr, C)
+                    self._svm_lst[i].update(0, None, learning_rate_per_itr, C)
 
     def test(self, test, test_labels):
         """

@@ -94,7 +94,7 @@ def find_best_c(org_train, org_train_labels, org_validation, org_validation_labe
         for i in range(nof_iters):
             mc_svm = MultiClassSVM(max_samples_size=org_train.shape[0], num_of_classes=10)
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
-            #training_acc += mc_svm.test(org_train, org_train_labels)
+            training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
 
         training_mean_acc_lst.append(training_acc / float(nof_iters))
@@ -132,7 +132,7 @@ def find_best_lr(org_train, org_train_labels, org_validation, org_validation_lab
         for i in range(nof_iters):
             mc_svm = MultiClassSVM(max_samples_size=org_train.shape[0], num_of_classes=10)
             mc_svm.train(org_train, org_train_labels, lr, C=c, T=t)
-            #training_acc += mc_svm.test(org_train, org_train_labels)
+            training_acc += mc_svm.test(org_train, org_train_labels)
             validation_acc += mc_svm.test(org_validation, org_validation_labels)
 
         training_mean_acc_lst.append(training_acc / float(nof_iters))

@@ -33,7 +33,7 @@ class KernelSVM(object):
         self._misclassified_coeffs = np.zeros(max_samples_size)
         self._misclassified_list = []
 
-    def update(self, x, learning_rate_step, C):
+    def update(self, sign, x, learning_rate_step, C):
         """
         This function trains the KernelSVM algorithm. It updates the misclassified xi list only when we are mistaking
         :param learning_rate_step: learning rate
@@ -46,7 +46,7 @@ class KernelSVM(object):
         if x is None:
             # When we update the others there is no need to append to misclassified_list
             return
-        self._misclassified_coeffs[self._misclassified_cnt] = learning_rate_step * C
+        self._misclassified_coeffs[self._misclassified_cnt] = learning_rate_step * C * sign
         self._misclassified_list.append(x)
         self._misclassified_cnt += 1
 
@@ -82,7 +82,7 @@ class KernelSVM(object):
             return 0
 
         dot_product = np.dot(np.array(self._misclassified_list), xx.transpose()) + 1
-        return np.square(dot_product).transpose()
+        return (np.square(dot_product)).transpose()
 
     def _linear_kernel(self, xx):
         """
