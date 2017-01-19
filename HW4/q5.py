@@ -1,0 +1,72 @@
+from numpy import *
+import numpy.random
+from sklearn.datasets import fetch_mldata
+import sklearn.preprocessing
+import os
+import numpy as np
+# import matplotlib
+# matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
+# C Grid search params
+from HW4.AdaBoost import AdaBoost
+
+# Training params
+ITERS = 10
+
+
+def get_train_validation_test_data():
+    """
+    This function get MNIST data and split it to train, validation and test data and labels
+    :return: train_data, train_labels, validation_data, validation_labels, test_data, test_labels
+    """
+    mnist = fetch_mldata('MNIST original', data_home=os.getcwd())
+    data = mnist['data']
+    labels = mnist['target']
+
+    neg, pos = 0, 8
+    train_idx = numpy.random.RandomState(0).permutation(where((labels[:60000] == neg) | (labels[:60000] == pos))[0])
+    test_idx = numpy.random.RandomState(0).permutation(where((labels[60000:] == neg) | (labels[60000:] == pos))[0])
+
+    train_data_size = 2000
+    train_data_unscaled = data[train_idx[:train_data_size], :].astype(float)
+    train_labels = (labels[train_idx[:train_data_size]] == pos) * 2 - 1
+
+    # validation_data_unscaled = data[train_idx[6000:], :].astype(float)
+    # validation_labels = (labels[train_idx[6000:]] == pos)*2-1
+
+    test_data_size = 2000
+    test_data_unscaled = data[60000 + test_idx[:test_data_size], :].astype(float)
+    test_labels = (labels[60000 + test_idx[:test_data_size]] == pos) * 2 - 1
+
+    # Preprocessing
+    train_data = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
+    # validation_data = sklearn.preprocessing.scale(validation_data_unscaled, axis=0, with_std=False)
+    test_data = sklearn.preprocessing.scale(test_data_unscaled, axis=0, with_std=False)
+    return train_data, train_labels, test_data, test_labels
+
+
+def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xlabel=''):
+    """
+    This function is plotting the graph
+    :param label: for plotting legend
+    :param title: title for the plotting
+    :param ylabel: ylabel for the plotting
+    :param xlabel: xlabel for the plotting
+    :param error_lst: the of errors
+    :param x_lst: list of the number of samples
+    :param file_name: file_name to be saved
+    """
+    plt.plot(x_lst, error_lst, label=label)
+    plt.title(title)
+    plt.ylabel(ylabel)
+    plt.xlabel(xlabel)
+    plt.savefig('{}.png'.format(file_name))
+
+
+if __name__ == '__main__':
+    # Get train, validation and test data
+    org_train, org_train_labels, org_test, org_test_labels = get_train_validation_test_data()
+    ada_boost = AdaBoost(nof_features=org_train.shape[1], T=ITERS, m=org_train.shape[0])
+    ada_boost.train(org_train, org_train_labels)
+    print 'end'
