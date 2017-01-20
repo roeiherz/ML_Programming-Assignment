@@ -72,7 +72,7 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a'):
     This function will plot Iteration Vs Accuracy training and testing error
     """
     # label 1 is 8 number and -1 is 0 number. The num fields is for saving the figures
-    if label:
+    if label > 0:
         num = 8
     else:
         num = 0
