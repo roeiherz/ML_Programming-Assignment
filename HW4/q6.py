@@ -4,20 +4,13 @@ from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
 import numpy as np
-import plotly.plotly as py
 # import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-
-# Training params
-from sklearn.decomposition import RandomizedPCA
-
 from HW4.PCA import PCA
 
 NOF_EIGENVALUES = 100
-
 NOF_EIGENVECTORS = 5
-
 ITERS = 300
 
 
@@ -196,4 +189,3 @@ if __name__ == '__main__':
 
     # Part E
     part_e(org_train, org_train_labels)
-    print 'end'
