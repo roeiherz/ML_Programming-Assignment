@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from HW4.AdaBoost import AdaBoost
 
 # Training params
-ITERS = 500
+ITERS = 300
 
 
 def get_train_validation_test_data():
@@ -64,6 +64,27 @@ def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xl
     plt.savefig('{}.png'.format(file_name))
 
 
+def part_a(t_lst, acc_test_lst, acc_train_lst):
+    """
+    This function implements part a.
+    This function will plot Iteration Vs Accuracy training and testing error
+    """
+
+    plt.figure()
+    plot_graph(acc_train_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
+    plot_graph(acc_test_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
+
+
+def part_b(t_lst, loss_test_lst, loss_train_lst):
+    """
+    This function implements part b.
+    This function will plot Iteration Vs Accuracy training and testing error
+    """
+
+    plt.figure()
+    plot_graph(loss_test_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
+    plot_graph(loss_train_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
+
 if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels, org_test, org_test_labels = get_train_validation_test_data()
@@ -71,16 +92,20 @@ if __name__ == '__main__':
     ada_boost.train(org_train, org_train_labels)
 
     acc_test_lst = []
+    loss_test_lst = []
     acc_train_lst = []
+    loss_train_lst = []
     t_lst = range(1, ITERS + 1)
     for t in t_lst:
-        acc_test = ada_boost.test(org_test, org_test_labels, iterations=t)
+        acc_test, loss_test = ada_boost.test(org_test, org_test_labels, iterations=t)
         acc_test_lst.append(acc_test)
-        acc_train = ada_boost.test(org_train, org_train_labels, iterations=t)
+        loss_test_lst.append(loss_test)
+        acc_train, loss_train = ada_boost.test(org_train, org_train_labels, iterations=t)
         acc_train_lst.append(acc_train)
-        print 'T {} - Train Acc {}, Test Acc {}'.format(t, acc_train, acc_test)
+        loss_train_lst.append(loss_train)
+        print 'T {} - Train Acc {}, Test Acc {}, Test Loss {}, Train Loss {}'.format(t, acc_train, acc_test, loss_test,
+                                                                                     loss_train)
 
-    plt.figure()
-    plot_graph(acc_train_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
-    plot_graph(acc_test_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
+    part_a(t_lst, acc_test_lst, acc_train_lst)
+    part_b(t_lst, loss_test_lst, loss_train_lst)
     print 'end'

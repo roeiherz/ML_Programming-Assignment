@@ -47,17 +47,17 @@ class AdaBoost:
         :param labels: array of labels
         """
 
-
-
         for t in range(self._T):
-
+            # Each iteration we will update the params
             best_hypo_type = 0
             best_theta = 0
             best_weighted_acc = 0
             best_pixel_idx = 0
 
             for pixel_idx in range(self._nof_features):
-
+                # Foreach pixel (of 782) and each hypothesis type (-1 or 1) we will calc the theta and the weighted acc
+                # We will save the best hypo and the best theta for each pixel index and hypo and we will update
+                # the distribution accordingly
                 for hypo_type in [-1, 1]:
                     theta, weighted_acc = self._find_best_hypo(xs, pixel_idx, labels, hypo_type=hypo_type)
 
@@ -68,13 +68,17 @@ class AdaBoost:
                         best_weighted_acc = weighted_acc
                         best_pixel_idx = pixel_idx
 
+            # Calc the epsilon which is the error
             epsilon = 1 - best_weighted_acc
+            # Calc alpha
             a = 0.5 * math.log(best_weighted_acc / epsilon)
+            # Calc the prediction for the distribution
             pixel_vals = xs[:, best_pixel_idx]
             predication_low_theta = (pixel_vals <= best_theta) * 1.0
             predication_after_theta = (pixel_vals > best_theta) * -1.0
             predication_theta = predication_low_theta + predication_after_theta
             predication_theta *= best_hypo_type
+            # Update the distribution
             self._dist_arr *= math.e ** (predication_theta * labels * a * -1.0)
             self._dist_arr /= np.sum(self._dist_arr)
 
@@ -83,12 +87,12 @@ class AdaBoost:
 
     def _find_best_hypo(self, xs, pixel_idx, labels, hypo_type):
         """
-        This function implements finding best hypothesis
+        This function implements finding best hypothesis which return theta and weighted accuracy
         :param xs: xs data
         :param pixel_idx: pixel index
         :param labels: labels array
         :param hypo_type: hypothesis type is 1 or -1 according to the ex. input
-        :return:
+        :return: theta, weighted accuracy
         """
 
         # Sorted xs per pixel index (channel wise)
@@ -111,12 +115,19 @@ class AdaBoost:
         curr_weighted_acc = best_weighted_acc
 
         for sample_idx in sorted_indx:
+            # Foreach sample index in the sorted index we will calc his current theta and weighted acc dynamically
             if pixel_vals[sample_idx] == pixel_vals[sorted_indx[0]]:
                 continue
+
+            # Our starting theta is the current pixel
             curr_theta = xs[sample_idx][pixel_idx]
+            # Our starting weighted accuracy is calc according to the distribution of sample index
             curr_weighted_acc += labels[sample_idx] * self._dist_arr[sample_idx] * hypo_type
+            # For debugging purpose
             if curr_weighted_acc > 1:
-                print 'error'
+                print 'Error'
+
+            # Each progress we will the best weighted acc and best theta
             if curr_weighted_acc > best_weighted_acc:
                 best_weighted_acc = curr_weighted_acc
                 best_theta = curr_theta
@@ -125,7 +136,7 @@ class AdaBoost:
 
     def _update_params(self, t, a, best_theta, best_hypo_type, best_pixel_idx):
         """
-        This function updates the params
+        This function updates the params in the arrays
         :param t: iteration t
         :param a: alpha
         :param best_theta: the best theta
@@ -149,11 +160,21 @@ class AdaBoost:
         :return:
         """
 
+        # Size of samples
+        m = test_data.shape[0]
+        # The prediction
         predictions = self._predict(test_data, iterations)
-        acc_arr = predictions * test_labels
+        # This prediction is for the accuracy plots: sign( sigma(j=1..m) alpha_j*hypo_j) )
+        acc_predication = np.sign(predictions)
+        # This prediction is for the calculating the loss
+        loss_prediction = predictions * test_labels * -1.0
+        loss_arr = math.e ** loss_prediction
+        loss = np.sum(loss_arr) / m
+        # Calculating the accuracy
+        acc_arr = acc_predication * test_labels
         acc_arr[acc_arr < 0] = 0
-        acc = np.sum(acc_arr) / test_data.shape[0]
-        return acc
+        acc = np.sum(acc_arr) / m
+        return acc, loss
 
     def _predict(self, test_data, iterations):
         """
@@ -175,4 +196,4 @@ class AdaBoost:
             predication_theta *= self._hypo_type[t]
             total_predication += self._alpha[t] * predication_theta
 
-        return np.sign(total_predication)
+        return total_predication
