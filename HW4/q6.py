@@ -130,6 +130,38 @@ def part_d(train_dataset, org_train_labels):
     plt.savefig("q6_part_d.png")
 
 
+def part_e(train_dataset, org_train_labels):
+    """
+    This function implements part e.
+    This function will plot Iteration Vs Accuracy training and testing error
+    """
+
+    pos_train_data = get_label_dataset(org_train, org_train_labels, 1)
+    neg_train_data = get_label_dataset(org_train, org_train_labels, -1)
+    images_lst = [pos_train_data[0], pos_train_data[1], neg_train_data[0], neg_train_data[1]]
+
+    for k in [10, 30, 50]:
+        # Do PCA
+        pca = PCA(train_dataset)
+        u, d, v = pca.run(dim=k)
+        # Index for saving different names of images
+        idx = 0
+        for image in images_lst:
+            # image is x
+            x = image
+            plt.figure()
+            plt.imshow(np.reshape(x, (28, 28)), interpolation='nearest', cmap='gray')
+            plt.savefig("q6_part_e_original_{}_k_{}.png".format(idx, k))
+            # Encoding the image
+            img_encode = np.dot(v, x)
+            # Decoding the image
+            img_decode = np.dot(u, img_encode)
+            plt.figure()
+            plt.imshow(np.reshape(img_decode, (28, 28)), interpolation='nearest', cmap='gray')
+            plt.savefig("q6_part_e_decode_{}_k_{}.png".format(idx, k))
+            idx += 1
+
+
 def get_label_dataset(org_train, org_train_labels, label):
     """
     This function create only the necessary label data from the original data
@@ -155,5 +187,8 @@ if __name__ == '__main__':
     # part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='c', both=1)
 
     # Part D
-    part_d(org_train, org_train_labels)
+    # part_d(org_train, org_train_labels)
+
+    # Part E
+    part_e(org_train, org_train_labels)
     print 'end'
