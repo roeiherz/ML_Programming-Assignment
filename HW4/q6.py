@@ -128,7 +128,6 @@ def part_d(train_dataset, org_train_labels):
     plt.figure()
     plt.scatter(mat_data[:, 0], mat_data[:, 1], c=org_train_labels)
     plt.savefig("q6_part_d.png")
-    plt.savefig("mnist_pca.png")
 
 
 def get_label_dataset(org_train, org_train_labels, label):
@@ -148,12 +147,12 @@ if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels = get_train_validation_test_data()
 
-    # Part A - only number 8
-    part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a')
-    # Part B - only number 0
-    part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='b')
-    # Part C - both numbers 0 and 1
-    part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='c', both=1)
+    # # Part A - only number 8
+    # part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a')
+    # # Part B - only number 0
+    # part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='b')
+    # # Part C - both numbers 0 and 1
+    # part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='c', both=1)
 
     # Part D
     part_d(org_train, org_train_labels)
