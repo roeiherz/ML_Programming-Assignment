@@ -68,6 +68,7 @@ def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xl
     plt.ylabel(ylabel)
     plt.xlabel(xlabel)
     plt.savefig('{}.png'.format(file_name))
+    plt.close()
 
 
 def part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a', both=0):
@@ -95,8 +96,9 @@ def part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a', both=0
 
     # Save the mean image
     plt.figure()
-    plt.imshow(np.reshape(train_data_mean, (28, 28)), interpolation='nearest', cmap='gray')
+    plt.imshow(np.reshape(train_data_mean, (28, 28)), interpolation='nearest')
     plt.savefig('q6_part_{}_mean_image'.format(section))
+    plt.close()
 
     # Do PCA
     pca = PCA(train_dataset)
@@ -105,8 +107,9 @@ def part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a', both=0
     # Save the eigen-vectors
     for i in range(NOF_EIGENVECTORS):
         plt.figure()
-        plt.imshow(np.reshape(v[i], (28, 28)), interpolation='nearest', cmap='gray')
+        plt.imshow(np.reshape(v[i], (28, 28)), interpolation='nearest')
         plt.savefig('q6_part_{}_i{}_label_{}'.format(section, i, num))
+        plt.close()
 
     # Save the eigenvalues
     plt.figure()
@@ -150,15 +153,17 @@ def part_e(train_dataset, org_train_labels):
             # image is x
             x = image
             plt.figure()
-            plt.imshow(np.reshape(x, (28, 28)), interpolation='nearest', cmap='gray')
+            plt.imshow(np.reshape(x, (28, 28)), interpolation='nearest')
             plt.savefig("q6_part_e_original_{}_k_{}.png".format(idx, k))
+            plt.close()
             # Encoding the image
             img_encode = np.dot(v, x)
             # Decoding the image
             img_decode = np.dot(u, img_encode)
             plt.figure()
-            plt.imshow(np.reshape(img_decode, (28, 28)), interpolation='nearest', cmap='gray')
+            plt.imshow(np.reshape(img_decode, (28, 28)), interpolation='nearest')
             plt.savefig("q6_part_e_decode_{}_k_{}.png".format(idx, k))
+            plt.close()
             idx += 1
 
 
@@ -179,15 +184,15 @@ if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels = get_train_validation_test_data()
 
-    # # Part A - only number 8
-    # part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a')
-    # # Part B - only number 0
-    # part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='b')
-    # # Part C - both numbers 0 and 1
-    # part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='c', both=1)
+    # Part A - only number 8
+    part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a')
+    # Part B - only number 0
+    part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='b')
+    # Part C - both numbers 0 and 1
+    part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='c', both=1)
 
     # Part D
-    # part_d(org_train, org_train_labels)
+    part_d(org_train, org_train_labels)
 
     # Part E
     part_e(org_train, org_train_labels)
