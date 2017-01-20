@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 # Training params
 from HW4.PCA import PCA
 
+NUF_EIGENVECTORS = 5
+
 ITERS = 300
 
 
@@ -34,15 +36,16 @@ def get_train_validation_test_data():
     # validation_data_unscaled = data[train_idx[6000:], :].astype(float)
     # validation_labels = (labels[train_idx[6000:]] == pos)*2-1
 
-    test_data_size = 2000
-    test_data_unscaled = data[60000 + test_idx[:test_data_size], :].astype(float)
-    test_labels = (labels[60000 + test_idx[:test_data_size]] == pos) * 2 - 1
+    # test_data_size = 2000
+    # test_data_unscaled = data[60000 + test_idx[:test_data_size], :].astype(float)
+    # test_labels = (labels[60000 + test_idx[:test_data_size]] == pos) * 2 - 1
 
     # Preprocessing
+    train_data_mean = np.mean(train_data_unscaled, axis=0)
     train_data = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
     # validation_data = sklearn.preprocessing.scale(validation_data_unscaled, axis=0, with_std=False)
-    test_data = sklearn.preprocessing.scale(test_data_unscaled, axis=0, with_std=False)
-    return train_data, train_labels, test_data, test_labels
+    # test_data = sklearn.preprocessing.scale(test_data_unscaled, axis=0, with_std=False)
+    return train_data, train_labels, train_data_mean
 
 
 def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xlabel=''):
@@ -63,34 +66,46 @@ def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xl
     plt.savefig('{}.png'.format(file_name))
 
 
-def part_a(org_train, org_train_labels):
+def part_a_and_b(org_train, org_train_labels, label=1, section='a'):
     """
-    This function implements part a.
+    This function implements part a and b.
     This function will plot Iteration Vs Accuracy training and testing error
     """
-    # label 1 is 8 number
-    label = 1
+    # label 1 is 8 number and -1 is 0 number. The num fields is for saving the figures
+    if label:
+        num = 8
+    else:
+        num = 0
+
     train_dataset = get_label_dataset(org_train, org_train_labels, label)
     pca = PCA(train_dataset)
-    pca.run(dim=5)
+    u, d = pca.run(dim=100)
 
+    for i in range(NUF_EIGENVECTORS):
+        plt.figure()
+        plt.imshow(np.reshape(u[i], (28, 28)), interpolation='nearest', cmap='gray')
+        plt.savefig('q6_part_{}_i_{}_label_{}'.format(section, i, num))
 
     plt.figure()
-    # plot_graph(acc_train_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
-    # plot_graph(acc_test_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
+    plot_graph(d[:NUF_EIGENVECTORS], range(1, NUF_EIGENVECTORS + 1), "q6_part_{}_label_{}".format(section, num), "",
+               "Iteration vs EigenValues",
+               "EigenValues", "Iteration")
+
+    print 'debug'
 
 
 def get_label_dataset(org_train, org_train_labels, label):
     """
-    This function will get only the
-    :param org_train:
-    :param org_train_labels:
+    This function create only the necessary label data from the original data
+    :param org_train: training original dataset
+    :param org_train_labels: training labels dataset
     :return:
     """
 
     label_idx = np.where(org_train_labels == label)
     training_dataset_label = org_train[label_idx]
     return training_dataset_label
+
 
 def part_b(t_lst, loss_test_lst, loss_train_lst):
     """
@@ -102,11 +117,17 @@ def part_b(t_lst, loss_test_lst, loss_train_lst):
     plot_graph(loss_test_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
     plot_graph(loss_train_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
 
+
 if __name__ == '__main__':
     # Get train, validation and test data
-    org_train, org_train_labels, org_test, org_test_labels = get_train_validation_test_data()
+    org_train, org_train_labels, train_data_mean = get_train_validation_test_data()
 
-    # print 'T {} - Train Acc {}, Test Acc {}, Test Loss {}, Train Loss {}'.format(1,2,2,3)
-    part_a(org_train, org_train_labels)
+    # Save the mean image
+    plt.figure()
+    plt.imshow(np.reshape(train_data_mean, (28, 28)), interpolation='nearest', cmap='gray')
+    plt.savefig('q6_part_a_mean_image')
+
+    part_a_and_b(org_train, org_train_labels, label=1, section='a')
+    part_a_and_b(org_train, org_train_labels, label=-1, section='b')
     # part_b()
     print 'end'

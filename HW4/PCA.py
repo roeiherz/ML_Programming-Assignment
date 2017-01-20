@@ -20,5 +20,4 @@ class PCA:
         """
         conv_mat = np.dot(np.transpose(self._data), self._data)
         u, d, v = np.linalg.svd(conv_mat)
-
-        print 'debug'
+        return u[:dim], d[:dim]
