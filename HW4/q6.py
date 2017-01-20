@@ -11,7 +11,9 @@ import matplotlib.pyplot as plt
 # Training params
 from HW4.PCA import PCA
 
-NUF_EIGENVECTORS = 5
+NOF_EIGENVALUES = 100
+
+NOF_EIGENVECTORS = 5
 
 ITERS = 300
 
@@ -89,13 +91,13 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a'):
     pca = PCA(train_dataset)
     u, d = pca.run(dim=100)
 
-    for i in range(NUF_EIGENVECTORS):
+    for i in range(NOF_EIGENVECTORS):
         plt.figure()
         plt.imshow(np.reshape(u[i], (28, 28)), interpolation='nearest', cmap='gray')
         plt.savefig('q6_part_{}_i{}_label_{}'.format(section, i, num))
 
     plt.figure()
-    plot_graph(d[:NUF_EIGENVECTORS], range(1, NUF_EIGENVECTORS + 1), "q6_part_{}_label_{}".format(section, num), "",
+    plot_graph(d, range(1, NOF_EIGENVALUES + 1), "q6_part_{}_label_{}".format(section, num), "",
                "Iteration vs EigenValues",
                "EigenValues", "Iteration")
 
