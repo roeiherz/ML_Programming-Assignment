@@ -38,7 +38,7 @@ class AdaBoost:
         # This is hypothesis 1 or -1 per iteration
         self._hypo_type = np.zeros(T)
         # This is a pixel array which is saves which is the pixel of the hypo
-        self._pixel_arr = np.zeros(T)
+        self._pixel_arr = np.zeros(T).astype("int")
 
     def train(self, xs, labels):
         """
@@ -47,12 +47,15 @@ class AdaBoost:
         :param labels: array of labels
         """
 
-        best_hypo_type = 0
-        best_theta = 0
-        best_weighted_acc = 0
-        best_pixel_idx = 0
+
 
         for t in range(self._T):
+
+            best_hypo_type = 0
+            best_theta = 0
+            best_weighted_acc = 0
+            best_pixel_idx = 0
+
             for pixel_idx in range(self._nof_features):
 
                 for hypo_type in [-1, 1]:

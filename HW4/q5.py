@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from HW4.AdaBoost import AdaBoost
 
 # Training params
-ITERS = 3
+ITERS = 500
 
 
 def get_train_validation_test_data():
@@ -78,6 +78,7 @@ if __name__ == '__main__':
         acc_test_lst.append(acc_test)
         acc_train = ada_boost.test(org_train, org_train_labels, iterations=t)
         acc_train_lst.append(acc_train)
+        print 'T {} - Train Acc {}, Test Acc {}'.format(t, acc_train, acc_test)
 
     plt.figure()
     plot_graph(acc_train_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
