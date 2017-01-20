@@ -67,20 +67,27 @@ def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xl
     plt.savefig('{}.png'.format(file_name))
 
 
-def part_a_and_b(org_train, org_train_labels, label=1, section='a'):
+def part_a_and_b(org_train, org_train_labels, label=1, section='a', both=0):
     """
     This function implements part a and b.
     This function will plot Iteration Vs Accuracy training and testing error
     """
-    # label 1 is 8 number and -1 is 0 number. The num fields is for saving the figures
-    if label > 0:
-        num = 8
-    else:
-        num = 0
 
-    train_data_unscaled = get_label_dataset(org_train, org_train_labels, label)
-    train_data_mean = np.mean(train_data_unscaled, axis=0)
-    train_dataset = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
+    # Both check if the label is 0 and 8 we do not need for scaled the data for one of the labels
+    if not both:
+        # label 1 is 8 number and -1 is 0 number. The num fields is for saving the figures
+        if label > 0:
+            num = 8
+        else:
+            num = 0
+
+        train_data_unscaled = get_label_dataset(org_train, org_train_labels, label)
+        train_data_mean = np.mean(train_data_unscaled, axis=0)
+        train_dataset = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
+    else:
+        # the train data should not change (its already for both labels
+        train_dataset = org_train
+        train_data_mean = np.mean(train_dataset, axis=0)
 
     # Save the mean image
     plt.figure()
@@ -91,11 +98,13 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a'):
     pca = PCA(train_dataset)
     u, d = pca.run(dim=100)
 
+    # Save the eigen-vectors
     for i in range(NOF_EIGENVECTORS):
         plt.figure()
         plt.imshow(np.reshape(u[i], (28, 28)), interpolation='nearest', cmap='gray')
         plt.savefig('q6_part_{}_i{}_label_{}'.format(section, i, num))
 
+    # Save the eigen-values
     plt.figure()
     plot_graph(d, range(1, NOF_EIGENVALUES + 1), "q6_part_{}_label_{}".format(section, num), "",
                "Iteration vs EigenValues",
@@ -130,6 +139,10 @@ if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels = get_train_validation_test_data()
 
+    # Part A - only number 8
     part_a_and_b(org_train, org_train_labels, label=1, section='a')
+    # Part B - only number 0
     part_a_and_b(org_train, org_train_labels, label=-1, section='b')
+    # Part C - both numbers 0 and 1
+    part_a_and_b(org_train, org_train_labels, label=-1, section='c', both=1)
     print 'end'

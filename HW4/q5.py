@@ -80,8 +80,9 @@ def part_b(t_lst, loss_test_lst, loss_train_lst):
     """
 
     plt.figure()
-    plot_graph(loss_test_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
-    plot_graph(loss_train_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
+    plot_graph(loss_test_lst, t_lst, "q5_part_b_test", "", "Iteration vs Loss Test", "Loss", "Iteration")
+    plt.figure()
+    plot_graph(loss_train_lst, t_lst, "q5_part_b_train", "", "Iteration vs Loss Train", "Loss", "Iteration")
 
 if __name__ == '__main__':
     # Get train, validation and test data
