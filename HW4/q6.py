@@ -7,10 +7,11 @@ import numpy as np
 # import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from HW4.AdaBoost import AdaBoost
 
 # Training params
-ITERS = 200
+from HW4.PCA import PCA
+
+ITERS = 300
 
 
 def get_train_validation_test_data():
@@ -62,16 +63,34 @@ def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xl
     plt.savefig('{}.png'.format(file_name))
 
 
-def part_a(t_lst, acc_test_lst, acc_train_lst):
+def part_a(org_train, org_train_labels):
     """
     This function implements part a.
     This function will plot Iteration Vs Accuracy training and testing error
     """
+    # label 1 is 8 number
+    label = 1
+    train_dataset = get_label_dataset(org_train, org_train_labels, label)
+    pca = PCA(train_dataset)
+    pca.run(dim=5)
+
 
     plt.figure()
-    plot_graph(acc_train_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
-    plot_graph(acc_test_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
+    # plot_graph(acc_train_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
+    # plot_graph(acc_test_lst, t_lst, "q5_part_a", "", "Iteration vs Accuracy", "Accuracy", "Iteration")
 
+
+def get_label_dataset(org_train, org_train_labels, label):
+    """
+    This function will get only the
+    :param org_train:
+    :param org_train_labels:
+    :return:
+    """
+
+    label_idx = np.where(org_train_labels == label)
+    training_dataset_label = org_train[label_idx]
+    return training_dataset_label
 
 def part_b(t_lst, loss_test_lst, loss_train_lst):
     """
@@ -86,24 +105,8 @@ def part_b(t_lst, loss_test_lst, loss_train_lst):
 if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels, org_test, org_test_labels = get_train_validation_test_data()
-    ada_boost = AdaBoost(nof_features=org_train.shape[1], T=ITERS, m=org_train.shape[0])
-    ada_boost.train(org_train, org_train_labels)
 
-    acc_test_lst = []
-    loss_test_lst = []
-    acc_train_lst = []
-    loss_train_lst = []
-    t_lst = range(1, ITERS + 1)
-    for t in t_lst:
-        acc_test, loss_test = ada_boost.test(org_test, org_test_labels, iterations=t)
-        acc_test_lst.append(acc_test)
-        loss_test_lst.append(loss_test)
-        acc_train, loss_train = ada_boost.test(org_train, org_train_labels, iterations=t)
-        acc_train_lst.append(acc_train)
-        loss_train_lst.append(loss_train)
-        print 'T {} - Train Acc {}, Test Acc {}, Test Loss {}, Train Loss {}'.format(t, acc_train, acc_test, loss_test,
-                                                                                     loss_train)
-
-    part_a(t_lst, acc_test_lst, acc_train_lst)
-    part_b(t_lst, loss_test_lst, loss_train_lst)
+    # print 'T {} - Train Acc {}, Test Acc {}, Test Loss {}, Train Loss {}'.format(1,2,2,3)
+    part_a(org_train, org_train_labels)
+    # part_b()
     print 'end'
