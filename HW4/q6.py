@@ -104,7 +104,7 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a', both=0):
         plt.imshow(np.reshape(u[i], (28, 28)), interpolation='nearest', cmap='gray')
         plt.savefig('q6_part_{}_i{}_label_{}'.format(section, i, num))
 
-    # Save the eigen-values
+    # Save the eigenvalues
     plt.figure()
     plot_graph(d, range(1, NOF_EIGENVALUES + 1), "q6_part_{}_label_{}".format(section, num), "",
                "Iteration vs EigenValues",
