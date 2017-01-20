@@ -4,11 +4,14 @@ from sklearn.datasets import fetch_mldata
 import sklearn.preprocessing
 import os
 import numpy as np
+import plotly.plotly as py
 # import matplotlib
 # matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 # Training params
+from sklearn.decomposition import RandomizedPCA
+
 from HW4.PCA import PCA
 
 NOF_EIGENVALUES = 100
@@ -67,7 +70,7 @@ def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xl
     plt.savefig('{}.png'.format(file_name))
 
 
-def part_a_and_b(org_train, org_train_labels, label=1, section='a', both=0):
+def part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a', both=0):
     """
     This function implements part a and b.
     This function will plot Iteration Vs Accuracy training and testing error
@@ -86,6 +89,7 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a', both=0):
         train_dataset = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
     else:
         # the train data should not change (its already for both labels
+        num = "0&8"
         train_dataset = org_train
         train_data_mean = np.mean(train_dataset, axis=0)
 
@@ -96,12 +100,12 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a', both=0):
 
     # Do PCA
     pca = PCA(train_dataset)
-    u, d = pca.run(dim=100)
+    u, d, v = pca.run(dim=100)
 
     # Save the eigen-vectors
     for i in range(NOF_EIGENVECTORS):
         plt.figure()
-        plt.imshow(np.reshape(u[i], (28, 28)), interpolation='nearest', cmap='gray')
+        plt.imshow(np.reshape(v[i], (28, 28)), interpolation='nearest', cmap='gray')
         plt.savefig('q6_part_{}_i{}_label_{}'.format(section, i, num))
 
     # Save the eigenvalues
@@ -109,6 +113,22 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a', both=0):
     plot_graph(d, range(1, NOF_EIGENVALUES + 1), "q6_part_{}_label_{}".format(section, num), "",
                "Iteration vs EigenValues",
                "EigenValues", "Iteration")
+
+
+def part_d(train_dataset, org_train_labels):
+    """
+    This function implements part d.
+    This function will plot Iteration Vs Accuracy training and testing error
+    """
+
+    # Do PCA
+    pca = PCA(train_dataset)
+    u, d, v = pca.run(dim=2)
+    mat_data = np.dot(train_dataset, np.transpose(v))
+    plt.figure()
+    plt.scatter(mat_data[:, 0], mat_data[:, 1], c=org_train_labels)
+    plt.savefig("q6_part_d.png")
+    plt.savefig("mnist_pca.png")
 
 
 def get_label_dataset(org_train, org_train_labels, label):
@@ -124,25 +144,17 @@ def get_label_dataset(org_train, org_train_labels, label):
     return training_dataset_label
 
 
-def part_b(t_lst, loss_test_lst, loss_train_lst):
-    """
-    This function implements part b.
-    This function will plot Iteration Vs Accuracy training and testing error
-    """
-
-    plt.figure()
-    plot_graph(loss_test_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
-    plot_graph(loss_train_lst, t_lst, "q5_part_b", "", "Iteration vs Loss", "Loss", "Iteration")
-
-
 if __name__ == '__main__':
     # Get train, validation and test data
     org_train, org_train_labels = get_train_validation_test_data()
 
     # Part A - only number 8
-    part_a_and_b(org_train, org_train_labels, label=1, section='a')
+    part_a_and_b_and_c(org_train, org_train_labels, label=1, section='a')
     # Part B - only number 0
-    part_a_and_b(org_train, org_train_labels, label=-1, section='b')
+    part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='b')
     # Part C - both numbers 0 and 1
-    part_a_and_b(org_train, org_train_labels, label=-1, section='c', both=1)
+    part_a_and_b_and_c(org_train, org_train_labels, label=-1, section='c', both=1)
+
+    # Part D
+    part_d(org_train, org_train_labels)
     print 'end'

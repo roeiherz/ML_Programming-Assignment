@@ -16,8 +16,8 @@ class PCA:
         """
         This function run the PCA
         :param dim:
-        :return:
+        :return: Returns columns in U and rows in v
         """
         conv_mat = np.dot(np.transpose(self._data), self._data)
         u, d, v = np.linalg.svd(conv_mat)
-        return u[:dim], d[:dim]
+        return u[:, :dim], d[:dim], v[:dim]
