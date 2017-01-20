@@ -41,11 +41,10 @@ def get_train_validation_test_data():
     # test_labels = (labels[60000 + test_idx[:test_data_size]] == pos) * 2 - 1
 
     # Preprocessing
-    train_data_mean = np.mean(train_data_unscaled, axis=0)
     train_data = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
     # validation_data = sklearn.preprocessing.scale(validation_data_unscaled, axis=0, with_std=False)
     # test_data = sklearn.preprocessing.scale(test_data_unscaled, axis=0, with_std=False)
-    return train_data, train_labels, train_data_mean
+    return train_data, train_labels
 
 
 def plot_graph(error_lst, x_lst, file_name='', label='', title='', ylabel='', xlabel=''):
@@ -77,21 +76,28 @@ def part_a_and_b(org_train, org_train_labels, label=1, section='a'):
     else:
         num = 0
 
-    train_dataset = get_label_dataset(org_train, org_train_labels, label)
+    train_data_unscaled = get_label_dataset(org_train, org_train_labels, label)
+    train_data_mean = np.mean(train_data_unscaled, axis=0)
+    train_dataset = sklearn.preprocessing.scale(train_data_unscaled, axis=0, with_std=False)
+
+    # Save the mean image
+    plt.figure()
+    plt.imshow(np.reshape(train_data_mean, (28, 28)), interpolation='nearest', cmap='gray')
+    plt.savefig('q6_part_{}_mean_image'.format(section))
+
+    # Do PCA
     pca = PCA(train_dataset)
     u, d = pca.run(dim=100)
 
     for i in range(NUF_EIGENVECTORS):
         plt.figure()
         plt.imshow(np.reshape(u[i], (28, 28)), interpolation='nearest', cmap='gray')
-        plt.savefig('q6_part_{}_i_{}_label_{}'.format(section, i, num))
+        plt.savefig('q6_part_{}_i{}_label_{}'.format(section, i, num))
 
     plt.figure()
     plot_graph(d[:NUF_EIGENVECTORS], range(1, NUF_EIGENVECTORS + 1), "q6_part_{}_label_{}".format(section, num), "",
                "Iteration vs EigenValues",
                "EigenValues", "Iteration")
-
-    print 'debug'
 
 
 def get_label_dataset(org_train, org_train_labels, label):
@@ -120,14 +126,8 @@ def part_b(t_lst, loss_test_lst, loss_train_lst):
 
 if __name__ == '__main__':
     # Get train, validation and test data
-    org_train, org_train_labels, train_data_mean = get_train_validation_test_data()
-
-    # Save the mean image
-    plt.figure()
-    plt.imshow(np.reshape(train_data_mean, (28, 28)), interpolation='nearest', cmap='gray')
-    plt.savefig('q6_part_a_mean_image')
+    org_train, org_train_labels = get_train_validation_test_data()
 
     part_a_and_b(org_train, org_train_labels, label=1, section='a')
     part_a_and_b(org_train, org_train_labels, label=-1, section='b')
-    # part_b()
     print 'end'
